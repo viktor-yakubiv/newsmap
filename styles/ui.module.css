@@ -1,0 +1,26 @@
+.container {
+  --row-gap: 0px;
+  --col-gap: 0px;
+  --sidebar-size: 65ch;
+  composes: with-sidebar from 'layout.module.css';
+  position: relative;
+  height: 100%;
+}
+
+.map {
+  position: sticky;
+  top: 0;
+  max-height: 100vh;
+}
+
+.content {
+  composes: sidebar from 'layout.module.css';
+  z-index: 1;
+}
+
+/* Styling */
+
+.content {
+  background-color: #fff;
+  box-shadow: var(--elevation-4);
+}

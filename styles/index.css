@@ -1,5 +1,9 @@
+/* Reset */
 @import url(~sanitize.css);
 @import url(~sanitize.css/typography.css);
+@import url('reset.css');
+
+/* Properties */
 @import url('space.css');
 @import url('size.css');
-@import url('layout.css');
+@import url('elevation.css');
