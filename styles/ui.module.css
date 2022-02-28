@@ -7,9 +7,11 @@
   height: 100%;
 }
 
-.map {
-  position: sticky;
+.map > * {
+  /* Overrides 'relative' by Leaflet */
+  position: sticky !important;
   top: 0;
+  min-height: 80vh;
   max-height: 100vh;
 }
 
