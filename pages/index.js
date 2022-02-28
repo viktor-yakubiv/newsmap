@@ -2,7 +2,7 @@ import Head from 'next/head'
 import PostsMap from '../components/map'
 import PostCard from '../components/post'
 import { useData } from '../data'
-import styles from '../styles/ui.module.css'
+import styles from '../styles/app.module.css'
 
 const Home = () => {
   const { data, error } = useData()
