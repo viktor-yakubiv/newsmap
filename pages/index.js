@@ -4,7 +4,7 @@ import { useData } from '../data'
 
 const Home = () => {
   const { data, error } = useData()
-  console.log(data)
+  const posts = data || []
 
   return (
     <>
@@ -15,10 +15,10 @@ const Home = () => {
       </Head>
 
       <div className="with-sidebar">
-        <LMap />
+        <LMap posts={posts} />
 
         <ul className="sidebar" style={{ '--sidebar-size': '30rem' }}>
-          {data.map(({ url, title, body, freshness }) => (
+          {posts.map(({ url, title, body, freshness }) => (
             <li key={url}>
               {title} {freshness}
             </li>

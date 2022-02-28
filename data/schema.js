@@ -5,19 +5,33 @@ class Location {
     const { latitude, longitude, title } = rawData
     Object.assign(this, { latitude, longitude, title })
   }
+
+  // Simplification for Leaflet, it should not be here
+  get lat() {
+    return this.latitude
+  }
+
+  get lng() {
+    return this.longitude
+  }
 }
 
 class Post {
-  constructor(rawData) {
-    const { title, body, publicationDate, locations } = rawData
+  constructor(init) {
+    const { publicationDate, locations, ...passRaw } = init
 
-    Object.assign(this, { title, body })
+    Object.assign(this, passRaw)
     this.publicationDate = new Date(publicationDate)
-    this.locations = locations.map(init => new Location(init))
+    this.locations = locations.map(locationInit => new Location(locationInit))
   }
 
   get freshness() {
     return (Date.now() - this.publicationDate.getTime()) / DAY
+  }
+
+  expand() {
+    return this.locations.map(location =>
+      Object.assign(new Post(this), { location }))
   }
 }
 
