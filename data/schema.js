@@ -7,15 +7,6 @@ class Location {
     const { latitude, longitude, title } = rawData
     Object.assign(this, { latitude, longitude, title })
   }
-
-  // Simplification for Leaflet, it should not be here
-  get lat() {
-    return this.latitude
-  }
-
-  get lng() {
-    return this.longitude
-  }
 }
 
 class Post {
