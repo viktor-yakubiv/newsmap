@@ -1,5 +1,5 @@
-import { useState, useMemo } from 'react'
-import { MapContainer, TileLayer, Marker } from 'react-leaflet'
+import { MapContainer, TileLayer } from 'react-leaflet'
+import Marker from './marker'
 import 'leaflet/dist/leaflet.css'
 
 const ukraineBounds = [
@@ -12,8 +12,6 @@ const ukraineBounds = [
 ]
 
 const StaticMap = ({ posts, children }) => {
-  console.log(posts)
-
   return (
   <MapContainer bounds={ukraineBounds}>
     <TileLayer
@@ -21,10 +19,12 @@ const StaticMap = ({ posts, children }) => {
       url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
     />
 
-    {posts.flatMap(p => p.expand()).map(({ url, location }) => (
+    {posts.flatMap(p => p.expand()).map(({ url, location, freshness }) => (
       <Marker
         key={[url, location.latitude, location.longitude].join()}
-        position={location}
+        latitude={location.latitude}
+        longitude={location.longitude}
+        freshness={freshness}
       />
     ))}
 
