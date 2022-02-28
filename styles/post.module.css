@@ -1,0 +1,39 @@
+.container {
+  composes: stack from 'layout.module.css';
+  composes: box from 'layout.module.css';
+
+  --spacer: var(--space-300);
+
+  background-color: #fff;
+  transition: 150ms;
+}
+
+.container:hover,
+.container:focus-within {
+  background-color: #f5f5f5;
+}
+
+.header,
+.footer {
+  composes: stack from 'layout.module.css';
+
+  --spacer: var(--space-200);
+}
+
+.title {
+  font-size: 1rem;
+}
+
+.meta {
+  composes: cluster from 'layout.module.css';
+
+  color: #616161;
+  font-size: 0.85rem;
+}
+
+.content {}
+
+.location {
+  color: #616161;
+  font-size: 0.85rem;
+}
