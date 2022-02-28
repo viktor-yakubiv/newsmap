@@ -6,9 +6,16 @@ const DynamicMap = dynamic(() => import('./map'), {
   ssr: false,
 })
 
-const MapContainer = ({ className, tag: Tag = 'div', ...passProps }) => (
+const MapContainer = ({
+  className,
+  tag: Tag = 'div',
+  children,
+  ...passProps
+}) => (
   <Tag className={joinClassNames(styles.container,className)}>
-    <DynamicMap {...passProps} />
+    <DynamicMap {...passProps}>
+      {children}
+    </DynamicMap>
   </Tag>
 )
 
