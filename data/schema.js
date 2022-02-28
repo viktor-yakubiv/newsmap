@@ -12,8 +12,8 @@ class Post {
     const { title, body, publicationDate, locations } = rawData
 
     Object.assign(this, { title, body })
-    this.publicationDate = new Data(publicationDate)
-    this.locations = locations.map(l => l.slice())
+    this.publicationDate = new Date(publicationDate)
+    this.locations = locations.map(init => new Location(init))
   }
 
   get freshness() {

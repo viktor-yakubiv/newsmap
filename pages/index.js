@@ -1,7 +1,12 @@
 import Head from 'next/head'
 import LMap from '../components/map'
+import { useData } from '../data'
 
-const Home = () => (
+const Home = () => {
+  const { data, error } = useData()
+  console.log(data)
+
+  return (
     <>
       <Head>
         <title>Новини</title>
@@ -12,11 +17,16 @@ const Home = () => (
       <div className="with-sidebar">
         <LMap />
 
-        <div className="sidebar" style={{ '--sidebar-size': '30rem' }}>
-          News go here...
-        </div>
+        <ul className="sidebar" style={{ '--sidebar-size': '30rem' }}>
+          {data.map(({ url, title, body, freshness }) => (
+            <li key={url}>
+              {title} {freshness}
+            </li>
+          ))}
+        </ul>
       </div>
     </>
   )
+}
 
 export default Home
