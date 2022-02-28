@@ -1,5 +1,5 @@
 import useSWR from 'swr'
-import { Post } from './schema'
+import { PostGroup } from './schema'
 
 const API_BASE = '/api/sample'
 const fetcher = (...args) => fetch(...args).then(res => res.json())
@@ -27,7 +27,7 @@ const useData = () => {
   }
 
   if (data) return {
-    data: data.map(transform).map(init => new Post(init)),
+    data: data.map(transform).map(init => new PostGroup(init)),
     error: null,
   }
 
