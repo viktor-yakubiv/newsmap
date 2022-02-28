@@ -1,0 +1,27 @@
+/*!
+ * Size
+ *
+ * Global sizing scale. Designed to be used especially but not exclusively
+ * for text and icons sizing.
+ *
+ * 400 is assumed to be default, similar to the normal font weight for text.
+ * The spacing grid was designed based on this assumption, starting from 400
+ * and increasing it for the higher numbers, and decreasing for the lower ones.
+ *
+ * The naming convention intentionally presumes possibility
+ * to create intermediate options like `--size-450: 1.125rem;`
+ * but those should be avoided as much as possible.
+ */
+
+:root {
+  --size-100: .625rem;
+  --size-200: .75rem;
+  --size-300: .875rem;
+  --size-400: 1rem;
+  --size-500: 1.25rem;
+  --size-600: 1.5rem;
+  --size-700: 1.75rem;
+  --size-800: 2rem;
+  --size-900: 2.5rem;
+  --size: var(--size-400);
+}

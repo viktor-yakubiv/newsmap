@@ -1,0 +1,172 @@
+/**
+ * Cluster
+ *
+ * Sets children to lay horizontally. If there is not enough space to fit all
+ * children, they break into another line. It also sets horizontal and vertical
+ * spacing between children.
+ *
+ * Details: https://every-layout.dev/layouts/cluster
+ */
+
+.cluster {
+  --row-gap: var(--space-200);
+  --col-gap: var(--space-200);
+
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--row-gap) var(--col-gap);
+}
+
+@supports not (gap: 1rem 1rem) {
+  .cluster > * {
+    margin-block-end: var(--row-gap);
+    margin-inline-end: var(--col-gap);
+  }
+}
+
+@supports not (margin-inline-end: 1rem) {
+  .cluster > * {
+    margin-right: var(--col-gap);
+    margin-bottom: var(--row-gap);
+  }
+}
+
+/**
+ * Stack
+ *
+ * Sets the vertical spacing between its children.
+ *
+ * 1. Removes default list style if used on list
+ *
+ * Details: https://every-layout.dev/layouts/stack
+ */
+
+.stack {
+  --spacer: var(--space-400);
+
+  list-style: none; /* 1 */
+}
+
+.stack > * {
+  margin-block: 0;
+}
+
+.stack > * + * {
+  margin-block-start: var(--spacer);
+}
+
+@supports not (margin-block-start: 1rem) {
+  .stack > * {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
+  .stack > * + * {
+    margin-top: var(--spacer);
+  }
+}
+
+/**
+ * Sidebar
+ *
+ * Makes the sidebar to occupy requested space and the content (not a sidebar)
+ * to occupy the rest of space, i.e. creates wide content and a narrow sidebar.
+ * If there is not enough space for content, i.e. it is more narrow than 50%
+ * of the parent, the layout breaks and the sidebar is rendered before
+ * or after the content (depends on the order of HTML elements).
+ *
+ * Details: https://every-layout.dev/layouts/sidebar
+ */
+
+.with-sidebar {
+  --row-gap: var(--space-600);
+  --col-gap: var(--space-700);
+
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--row-gap) var(--col-gap);
+}
+
+.with-sidebar > :not(.sidebar) {
+  flex-basis: 0;
+  flex-grow: 999;
+  min-inline-size: 50%;
+}
+
+.with-sidebar > .sidebar {
+  flex-basis: var(--sidebar-size);
+  flex-grow: 1;
+}
+
+@supports not (min-inline-size:  50%) {
+  .with-sidebar > :not(.sidebar) {
+    min-width: 50%;
+  }
+}
+
+/**
+ * Switcher
+ *
+ * Details: https://every-layout.dev/layouts/switcher
+ */
+
+.switcher {
+  --row-gap: var(--space-600);
+  --col-gap: var(--space-700);
+
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--row-gap) var(--col-gap);
+}
+
+.switcher > * {
+  flex-basis: calc((var(--switcher-breakpoint, 30rem) - 100%) * 999);
+  flex-grow: 1;
+}
+
+/**
+ * Box
+ *
+ * Details: https://every-layout.dev/layouts/box
+ *
+ * 1. Removes default list style if used on list item
+ *
+ * NOTE: This does not apply all techniques from the Every Layout
+ *       as these are not needed yet and it's usage has to be considered
+ *       in various color schemas.
+ */
+
+.box {
+  --inset-block: var(--space-400);
+  --inset-inline: var(--space-400);
+  padding-block: var(--inset-block);
+  padding-inline: var(--inset-inline);
+
+  list-style: none; /* 1 */
+}
+
+@supports not (padding-block:  var(--inset-block, 1rem)) {
+  .box {
+    padding: var(--inset-block) var(--inset-inline);
+  }
+}
+
+/**
+ * Visually hidden
+ *
+ * Hides the element for visual users but preserves it accessible
+ * for assistive technologies, e.g. screen readers.
+ */
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}

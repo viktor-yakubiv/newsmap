@@ -1,0 +1,27 @@
+/*!
+ * Space
+ *
+ * Global spacing setup. Designed to be used for margin, padding
+ * and gap (grid and flexbox gap) or any other whitespace.
+ *
+ * 400 is assumed to be default, similar to the normal font weight for text.
+ * The spacing grid was designed based on this assumption, starting from 400
+ * and increasing it for the higher numbers, and decreasing for the lower ones.
+ *
+ * The naming convention intentionally presumes possibility
+ * to create intermediate options like `--space-350: .75rem;`
+ * but those should be avoided as much as possible.
+ */
+
+:root {
+  --space-100: .125rem;
+  --space-200: .25rem;
+  --space-300: .5rem;
+  --space-400: 1rem;
+  --space-500: 1.25rem;
+  --space-600: 1.5rem;
+  --space-700: 2rem;
+  --space-800: 3rem;
+  --space-900: 4rem;
+  --space: var(--space-400);
+}
