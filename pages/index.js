@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import LMap from '../components/map'
+import Post from '../components/post'
 import { useData } from '../data'
 
 const Home = () => {
@@ -18,10 +19,12 @@ const Home = () => {
         <LMap posts={posts} />
 
         <ul className="sidebar" style={{ '--sidebar-size': '30rem' }}>
-          {posts.map(({ url, title, body, freshness }) => (
-            <li key={url}>
-              {title} {freshness}
-            </li>
+          {posts.map(post => (
+            <Post
+              key={post.url}
+              data={post}
+              tag="li"
+            />
           ))}
         </ul>
       </div>
