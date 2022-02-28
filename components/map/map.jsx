@@ -11,7 +11,7 @@ const ukraineBounds = [
   [52.334444, 33.777222],
 ]
 
-const StaticMap = ({ posts, children }) => {
+const StaticMap = ({ data: posts, children }) => {
   return (
   <MapContainer bounds={ukraineBounds}>
     <TileLayer
@@ -19,7 +19,7 @@ const StaticMap = ({ posts, children }) => {
       url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
     />
 
-    {posts.flatMap(p => p.expand()).map(({ url, location, freshness }) => (
+    {posts.map(({ url, location, freshness }) => (
       <Marker
         key={[url, location.latitude, location.longitude].join()}
         latitude={location.latitude}

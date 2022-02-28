@@ -1,11 +1,11 @@
 import Head from 'next/head'
-import LMap from '../components/map'
-import Post from '../components/post'
+import PostsMap from '../components/map'
+import PostCard from '../components/post'
 import { useData } from '../data'
 
 const Home = () => {
   const { data, error } = useData()
-  const posts = data || []
+  const postGroups = data || []
 
   return (
     <>
@@ -16,11 +16,11 @@ const Home = () => {
       </Head>
 
       <div className="with-sidebar">
-        <LMap posts={posts} />
+        <PostsMap data={postGroups.flatMap(p => p.expand())} />
 
         <ul className="sidebar" style={{ '--sidebar-size': '30rem' }}>
-          {posts.map(post => (
-            <Post
+          {postGroups.map(post => (
+            <PostCard
               key={post.url}
               data={post}
               tag="li"
