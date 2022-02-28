@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import SmapleMap from '../components/map'
+import LMap from '../components/map'
 
 const Home = () => (
     <>
@@ -9,7 +9,13 @@ const Home = () => (
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <SmapleMap />
+      <div className="with-sidebar">
+        <LMap />
+
+        <div className="sidebar" style={{ '--sidebar-size': '30rem' }}>
+          News go here...
+        </div>
+      </div>
     </>
   )
 
