@@ -9,8 +9,8 @@ export default function handler(req, res) {
       "url": "https://facebook.com",
       "geo_coordinates": [
           {
-              "lat": 37.41651,
-              "lon": 50.42261,
+              "lat": 49.994507,
+              "lon": 36.145742,
               "text": "Харківська область, Харкіський район, Харків"
           }
       ]
