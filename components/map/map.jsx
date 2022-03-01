@@ -1,6 +1,5 @@
 import { MapContainer, TileLayer, useMapEvents } from 'react-leaflet'
 import Marker from './marker'
-import 'leaflet/dist/leaflet.css'
 
 const ukraineBounds = [
   // [52.334444, 33.288611],
