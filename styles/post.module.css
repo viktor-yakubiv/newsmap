@@ -6,6 +6,7 @@
 
   background-color: #fff;
   transition: 150ms;
+  cursor: pointer;
 }
 
 .container:hover,
