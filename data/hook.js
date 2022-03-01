@@ -1,39 +1,19 @@
 import useSWR from 'swr'
+import resolve from './resolve'
+import request from './request'
+import { transformPost } from './transformers'
 import { PostGroup } from './schema'
 
-const API_BASE = '/api/sample'
-const fetcher = (...args) => fetch(...args).then(res => res.json())
-
-const transformLocation = ({ lat, lon, text }) => ({
-  latitude: lat,
-  longitude: lon,
-  title: text,
-})
-
-const transform = ({ title, text, url, datetime, geo_coordinates, }) => ({
-  url,
-  title,
-  body: text,
-  publicationDate: datetime,
-  locations: geo_coordinates.map(transformLocation),
-})
-
-const useData = () => {
-  const { data, error } = useSWR(API_BASE, fetcher)
-
-  if (error) return {
-    error,
-    data: [],
-  }
-
-  if (data) return {
-    data: data.map(transform).map(init => new PostGroup(init)),
-    error: null,
-  }
+const useData = (parameters) => {
+  const url = resolve(parameters)
+  const { data, error } = useSWR(url, request)
 
   return {
-    data: null,
-    error: null,
+    loading: !data && !error,
+    data: (data || [])
+      .map(transformPost)
+      .map(rawPost => new PostGroup(rawPost)),
+    error,
   }
 }
 
