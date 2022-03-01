@@ -1,7 +1,7 @@
 .container {
   --row-gap: 0px;
   --col-gap: 0px;
-  --sidebar-size: 65ch;
+  --sidebar-size: 40ch;
   composes: with-sidebar from 'layout.module.css';
   position: relative;
   height: 100%;
