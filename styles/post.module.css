@@ -6,7 +6,6 @@
 
   background-color: #fff;
   transition: 150ms;
-  cursor: pointer;
 }
 
 .container:hover,
@@ -14,11 +13,14 @@
   background-color: #f5f5f5;
 }
 
-.header,
-.footer {
+.header {
   composes: stack from 'layout.module.css';
 
   --spacer: var(--space-200);
+}
+
+.footer {
+  composes: cluster from 'layout.module.css';
 }
 
 .title {
@@ -37,4 +39,8 @@
 .location {
   color: #616161;
   font-size: 0.85rem;
+}
+
+.source {
+  margin-inline-end: auto;
 }

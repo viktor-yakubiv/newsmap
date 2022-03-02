@@ -1,44 +1,31 @@
 import { useCallback, useRef } from 'react'
 import joinClassNames from 'classnames'
+import ActionBar from './action-bar'
 import styles from '../styles/post.module.css'
 import { formatDate, formatRelativeDate } from '../utils'
 
-const Post = ({ data, className, tag: Tag = 'div' }) => {
-  const containerRef = useRef(null)
-  const mouseDownTimeStamp = useRef(0)
+const formatDomain = (url) => new URL(url).hostname
 
+const Post = ({
+  data,
+  onEdit,
+  onDelete,
+  className,
+  tag: Tag = 'div',
+  ...restProps
+}) => {
   const isSectioning = /section|article/ig.test(Tag)
   const Header = isSectioning ? 'header' : 'div'
   const Footer = isSectioning ? 'footer' : 'div'
 
-  const recordMouseDown = useCallback((event) => {
-    mouseDownTimeStamp.current = event.timeStamp
-  }, [])
-
-  const clickLink = useCallback((event) => {
-    const clickDuration = event.timeStamp - mouseDownTimeStamp.current
-
-    if (clickDuration < 200 && containerRef?.current != null) {
-      containerRef.current.querySelector('h2 a')?.click()
-    }
-  }, [])
-
   return (
     <Tag
-      ref={containerRef}
       className={joinClassNames(styles.container, className)}
-      onMouseDown={recordMouseDown}
-      onClick={clickLink}
+      {...restProps}
     >
       <Header className={styles.header}>
         <h2 className={styles.title}>
-          <a
-            href={data.url}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            {data.title}
-          </a>
+          {data.title}
         </h2>
 
         <div className={styles.meta}>
@@ -55,10 +42,22 @@ const Post = ({ data, className, tag: Tag = 'div' }) => {
         {data.body}
       </div>
 
+      <p className={styles.location}>
+        {data.locations.map(l => l.title).join('; ')}
+      </p>
+
       <Footer className={styles.footer}>
-        <p className={styles.location}>
-          {data.locations.map(l => l.title).join('; ')}
+        <p className={styles.source}>
+          <a
+            href={data.url}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            { formatDomain(data.url) }
+          </a>
         </p>
+
+        <ActionBar onEdit={onEdit} onDelete={onDelete} hidden />
       </Footer>
     </Tag>
   )

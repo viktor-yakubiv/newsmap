@@ -15,6 +15,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: var(--row-gap) var(--col-gap);
+  list-style: none;
 }
 
 @supports not (gap: 1rem 1rem) {
