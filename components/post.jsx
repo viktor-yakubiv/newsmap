@@ -1,12 +1,7 @@
 import { useCallback, useRef } from 'react'
 import joinClassNames from 'classnames'
 import styles from '../styles/post.module.css'
-
-const dateFormat = new Intl.DateTimeFormat('uk-UA', {
-  dateStyle: 'short',
-  timeStyle: 'short',
-})
-const formatDate = date => dateFormat.format(date)
+import { formatDate, formatRelativeDate } from '../utils'
 
 const Post = ({ data, className, tag: Tag = 'div' }) => {
   const containerRef = useRef(null)
@@ -47,8 +42,11 @@ const Post = ({ data, className, tag: Tag = 'div' }) => {
         </h2>
 
         <div className={styles.meta}>
-          <time dateTime={data.publicationDate.toISOString()}>
-            {formatDate(data.publicationDate)}
+          <time
+            dateTime={data.publicationDate.toISOString()}
+            title={formatDate(data.publicationDate)}
+          >
+            {formatRelativeDate(data.publicationDate)}
           </time>
         </div>
       </Header>
