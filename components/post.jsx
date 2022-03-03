@@ -38,9 +38,10 @@ const Post = ({
         </div>
       </Header>
 
-      <div className={styles.content}>
-        {data.body}
-      </div>
+      <div
+        className={styles.content}
+        dangerouslySetInnerHTML={{ __html: data.body }}
+      />
 
       <p className={styles.location}>
         {data.locations.map(l => l.title).join('; ')}
