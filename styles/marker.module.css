@@ -1,6 +1,6 @@
 .marker {
   position: relative;
-  width: 100%;
+  width: 1.4;
   height: 100%;
   box-sizing: border-box;
   border: 2px solid #fff;
@@ -9,4 +9,5 @@
   box-shadow:
     inset 1px 1px 4px rgb(255 255 255 / .12),
     inset -1px -2px 8px rgb(0 0 0 / .12);
+  filter: grayscale(calc(100% - (100% * (1 - var(--freshness, 1)))));
 }
