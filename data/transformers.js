@@ -4,11 +4,11 @@ const transformLocation = ({ lat, lon, text }) => ({
   title: text,
 })
 
-const transformPost = ({ title, text, url, datetime, geo_coordinates, }) => ({
+const transformPost = ({ title, text, url, publishedAt, geo_coordinates, }) => ({
   url,
   title,
   body: text,
-  publicationDate: datetime,
+  publicationDate: publishedAt,
   locations: geo_coordinates.map(transformLocation),
 })
 

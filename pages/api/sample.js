@@ -1,123 +1,24 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 
-export default function handler(req, res) {
-  res.status(200).json([
-    {
-      "title": "Замічено руз транкспорту",
-      "text": "Громадяни помітили ворожого транкспорту в Харкові",
-      "datetime": "2022-02-28T12:00+02:00",
-      "url": "https://facebook.com",
-      "geo_coordinates": [
-          {
-              "lat": 49.994507,
-              "lon": 36.145742,
-              "text": "Харківська область, Харкіський район, Харків"
-          }
-      ]
-    },
-    {
-      "title": "Замічено руз транкспорту",
-      "text": "Громадяни помітили ворожого транкспорту в Харкові",
-      "datetime": "2022-02-28T12:00+02:00",
-      "url": "https://facebook.com?2",
-      "geo_coordinates": [
-          {
-              "lat": 48.994507,
-              "lon": 36.145742,
-              "text": "Харківська область, Харкіський район, Харків"
-          }
-      ]
-    },
-    {
-      "title": "Замічено руз транкспорту",
-      "text": "Громадяни помітили ворожого транкспорту в Харкові",
-      "datetime": "2022-02-28T12:00+02:00",
-      "url": "https://facebook.com?4",
-      "geo_coordinates": [
-          {
-              "lat": 47.994507,
-              "lon": 36.145742,
-              "text": "Харківська область, Харкіський район, Харків"
-          }
-      ]
-    },
-    {
-      "title": "Замічено руз транкспорту",
-      "text": "Громадяни помітили ворожого транкспорту в Харкові",
-      "datetime": "2022-02-28T12:00+02:00",
-      "url": "https://facebook.com?6",
-      "geo_coordinates": [
-          {
-              "lat": 46.994507,
-              "lon": 36.145742,
-              "text": "Харківська область, Харкіський район, Харків"
-          }
-      ]
-    },
-    {
-      "title": "Замічено руз транкспорту",
-      "text": "Громадяни помітили ворожого транкспорту в Харкові",
-      "datetime": "2022-02-28T12:00+02:00",
-      "url": "https://facebook.com?8",
-      "geo_coordinates": [
-          {
-              "lat": 45.994507,
-              "lon": 36.145742,
-              "text": "Харківська область, Харкіський район, Харків"
-          }
-      ]
-    },
-    {
-      "title": "Замічено руз транкспорту",
-      "text": "Громадяни помітили ворожого транкспорту в Харкові",
-      "datetime": "2022-02-28T12:00+02:00",
-      "url": "https://facebook.com?10",
-      "geo_coordinates": [
-          {
-              "lat": 44.5,
-              "lon": 36.145742,
-              "text": "Харківська область, Харкіський район, Харків"
-          }
-      ]
-    },
-    {
-      "title": "Замічено руз транкспорту",
-      "text": "Громадяни помітили ворожого транкспорту в Харкові",
-      "datetime": "2022-02-28T12:00+02:00",
-      "url": "https://facebook.com?12",
-      "geo_coordinates": [
-          {
-              "lat": 43.994507,
-              "lon": 36.145742,
-              "text": "Харківська область, Харкіський район, Харків"
-          }
-      ]
-    },
-    {
-      "title": "Замічено руз транкспорту",
-      "text": "Громадяни помітили ворожого транкспорту в Харкові",
-      "datetime": "2022-02-28T12:00+02:00",
-      "url": "https://facebook.com?14",
-      "geo_coordinates": [
-          {
-              "lat": 41.994507,
-              "lon": 36.145742,
-              "text": "Харківська область, Харкіський район, Харків"
-          }
-      ]
-    },
-    {
-      "title": "Замічено руз транкспорту",
-      "text": "Громадяни помітили ворожого транкспорту в Харкові",
-      "datetime": "2022-02-28T12:00+02:00",
-      "url": "https://facebook.com?16",
-      "geo_coordinates": [
-          {
-              "lat": 42.994507,
-              "lon": 36.145742,
-              "text": "Харківська область, Харкіський район, Харків"
-          }
-      ]
-    },
-  ])
+const dataUrl = 'https://gist.githubusercontent.com/viktor-yakubiv/f4da988e4ef66aa63fadef582ad6bb4b/raw/5358ece78f2d9fff8f2d1d80073605e98f0e5ba0/example.json'
+
+const [latMin, lngMin] = [44.386389, 22.163889]
+const [latMax, lngMax] = [52.334444, 40.198056]
+
+export default async function handler(req, res) {
+  fetch(dataUrl)
+    .then(r => r.json())
+    .then(data => data.mentions)
+    .then(posts => posts.map(post => {
+      const lat = latMin + Math.random() * (latMax - latMin)
+      const lon = lngMin + Math.random() * (lngMax - lngMin)
+
+      return {
+        ...post,
+        geo_coordinates: [
+          { lat, lon, text: [lat.toFixed(4), lon.toFixed(4)].join() }
+        ],
+      }
+    }))
+    .then(body => res.status(200).json(body))
 }
