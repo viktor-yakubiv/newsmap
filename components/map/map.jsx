@@ -10,6 +10,17 @@ const ukraineBounds = [
   [52.334444, 40.198056],
 ]
 
+const maxBounds = [
+  [
+    40.983333, // Black Sea South
+    16.975834, // Bratislava
+  ],
+  [
+    56.166667, // Belarus North
+    44.226527, // Volgograd
+  ],
+]
+
 const kyivPosition = [49, 32]
 
 const EventListeners = ({ onBoundsChange }) => {
@@ -21,7 +32,7 @@ const EventListeners = ({ onBoundsChange }) => {
 }
 
 const StaticMap = ({ data: posts, onBoundsChange }) => (
-  <MapContainer bounds={ukraineBounds} zoom={13}>
+  <MapContainer bounds={ukraineBounds} maxBounds={maxBounds}>
     <TileLayer
       attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
       url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
