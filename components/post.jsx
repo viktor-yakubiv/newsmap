@@ -50,11 +50,11 @@ const Post = ({
       <Footer className={styles.footer}>
         <p className={styles.source}>
           <a
-            href={data.url}
+            href={data.permalink}
             target="_blank"
             rel="noopener noreferrer"
           >
-            { formatDomain(data.url) }
+            { formatDomain(data.permalink) }
           </a>
         </p>
 

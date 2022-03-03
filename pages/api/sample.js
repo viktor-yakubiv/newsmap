@@ -15,7 +15,7 @@ export default async function handler(req, res) {
 
       return {
         ...post,
-        geo_coordinates: [
+        geoLocations: [
           { lat, lon, text: [lat.toFixed(4), lon.toFixed(4)].join() }
         ],
       }

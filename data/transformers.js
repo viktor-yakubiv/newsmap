@@ -4,21 +4,27 @@ const transformLocation = ({ lat, lon, text }) => ({
   title: text,
 })
 
-const transformPost = ({ title, text, url, publishedAt, geo_coordinates, }) => ({
-  url,
-  title,
-  body: text,
-  publicationDate: publishedAt,
-  locations: geo_coordinates.map(transformLocation),
+const transformAuthor = author => author
+
+const transformPost = (post) => ({
+  id: post.id,
+  permalink: post.permalink,
+  text: post.text,
+  language: post.language,
+  author: transformAuthor(post.author),
+  publicationDate: post.publishedAt,
+  locations: post.geoLocations.map(transformLocation),
 })
 
 export {
+  transformAuthor,
   transformLocation,
   transformPost,
 }
 
 // Aliases for handy `import * as trasformers`
 export {
+  transformAuthor as author,
   transformLocation as location,
   transformPost as post,
 }
