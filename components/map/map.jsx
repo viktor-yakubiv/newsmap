@@ -2,14 +2,18 @@ import { MapContainer, TileLayer, useMapEvents } from 'react-leaflet'
 import Marker from './marker'
 
 const ukraineBounds = [
-  // [52.334444, 33.288611],
-  // [49.259167, 40.198056],
-  // [48.430556, 22.163889],
-  // [44.386389, 33.777222],
-  [44.386389, 22.163889],
-  [52.334444, 40.198056],
+  [
+    44.386389, // Foros (South)
+    22.163889, // Chop (West)
+  ],
+  [
+    52.334444, // Hremyach (North)
+    40.198056, // Rannya Zorya (East)
+  ],
 ]
 
+// We don't expect points beyond these coordinates.
+// Limiting the map to show and pan only up to those
 const maxBounds = [
   [
     40.983333, // Black Sea South
