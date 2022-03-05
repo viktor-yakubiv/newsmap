@@ -21,8 +21,6 @@ const maxBounds = [
   ],
 ]
 
-const kyivPosition = [49, 32]
-
 const EventListeners = ({ onBoundsChange }) => {
   const map = useMapEvents({
     moveend: () => onBoundsChange?.call(null, map.getBounds()),
