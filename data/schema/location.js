@@ -1,7 +1,7 @@
 class Location {
   constructor(rawData) {
-    const { latitude, longitude, title } = rawData
-    Object.assign(this, { latitude, longitude, title })
+    const { id, latitude, longitude, name } = rawData
+    Object.assign(this, { id, latitude, longitude, name })
   }
 }
 

@@ -38,9 +38,9 @@ const StaticMap = ({ data: posts, onBoundsChange }) => (
       url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
     />
 
-    {posts.map(({ url, location, freshness }) => (
+    {posts.map(({ id, location, freshness }) => (
       <Marker
-        key={[url, location.latitude, location.longitude].join()}
+        key={[id, location.id].join()}
         latitude={location.latitude}
         longitude={location.longitude}
         freshness={freshness}

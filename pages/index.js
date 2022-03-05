@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router'
 import Head from 'next/head'
 import PostsMap from '../components/map'
 import PostCard from '../components/post'
@@ -5,7 +6,8 @@ import { useData } from '../data'
 import styles from '../styles/app.module.css'
 
 const Home = () => {
-  const { data, error } = useData()
+  const router = useRouter()
+  const { data, error } = useData({ token: router.query.token })
   const postGroups = data || []
 
   return (

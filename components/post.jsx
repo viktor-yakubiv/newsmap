@@ -38,13 +38,12 @@ const Post = ({
         </div>
       </Header>
 
-      <div
-        className={styles.content}
-        dangerouslySetInnerHTML={{ __html: data.body }}
-      />
+      <div className={styles.content}>
+        { data.text }
+      </div>
 
       <p className={styles.location}>
-        {data.locations.map(l => l.title).join('; ')}
+        {data.locations.map(l => l.name).join('; ')}
       </p>
 
       <Footer className={styles.footer}>
