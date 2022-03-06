@@ -33,19 +33,20 @@ const EventListeners = ({ onBoundsChange }) => {
   return null
 }
 
-const StaticMap = ({ data: posts, onBoundsChange, onMarkerClick }) => (
+const StaticMap = ({ data, onBoundsChange, onMarkerClick }) => (
   <MapContainer bounds={ukraineBounds} maxBounds={maxBounds}>
     <TileLayer
       attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
       url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
     />
 
-    {posts.map(({ id, location, freshness }) => (
+    {data.posts.map(({ id, location, freshness }) => (
       <Marker
         key={[id, location.id].join()}
         latitude={location.latitude}
         longitude={location.longitude}
         freshness={freshness}
+        highlighted={data.highlighted?.includes(location.id)}
         onClick={() => onMarkerClick?.(id)}
       />
     ))}

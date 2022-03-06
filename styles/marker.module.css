@@ -13,4 +13,9 @@
     inset -1px -2px 8px rgb(0 0 0 / .12);
   filter: grayscale(calc(100% * (1 - var(--freshness, 1))));
   animation-duration: calc(150ms * var(--freshness, 1) + 100ms);
+  transition: background-color 50ms;
+}
+
+.highlighted {
+  background-color: #fdd835;
 }

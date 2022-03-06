@@ -18,6 +18,11 @@ const Home = () => {
     document.querySelector(`[data-id="${selectedPostId}"]`)?.scrollIntoView()
   }, [selectedPostId])
 
+  const [highlightedPostId, setHighlightedPost] = useState(null)
+  const highlightedLocations = postGroups
+    .find(({ id }) => id === highlightedPostId)
+    ?.locations.map(({ id }) => id)
+
   return (
     <>
       <Head>
@@ -28,7 +33,10 @@ const Home = () => {
       <div className={styles.container}>
         <PostsMap
           className={styles.map}
-          data={postGroups.flatMap(p => p.expand())}
+          data={{
+            posts: postGroups.flatMap(p => p.expand()),
+            highlighted: highlightedLocations,
+          }}
           onMarkerClick={handleMarkerClick}
         />
 
@@ -36,10 +44,12 @@ const Home = () => {
           <ul>
             {postGroups.map(post => (
               <PostCard
-                key={post.url}
+                key={post.id}
                 data={post}
                 data-id={post.id}
                 active={selectedPostId === post.id}
+                onMouseEnter={() => setHighlightedPost(post.id)}
+                onMouseLeave={() => setHighlightedPost(null)}
                 tag="li"
               />
             ))}
