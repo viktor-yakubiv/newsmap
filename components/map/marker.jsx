@@ -1,4 +1,4 @@
-import { useMemo } from 'react'
+import { useCallback, useMemo } from 'react'
 import { Marker as LeafletMarker } from 'react-leaflet'
 import Icon from './icon'
 
@@ -11,13 +11,13 @@ const Marker = ({ longitude, latitude, freshness, onClick }) => {
      lng: longitude
   }), [latitude, longitude])
 
+  const click = useCallback(() => onClick?.(), [onClick])
+
   return (
     <LeafletMarker
       position={position}
       icon={new Icon({ freshness })}
-      eventHandlers={{
-        click: onClick,
-      }}
+      eventHandlers={{ click }}
     />
   )
 }

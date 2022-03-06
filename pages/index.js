@@ -1,3 +1,4 @@
+import { useCallback, useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import Head from 'next/head'
 import PostsMap from '../components/map'
@@ -10,6 +11,13 @@ const Home = () => {
   const { data, error } = useData({ token: router.query.token })
   const postGroups = data || []
 
+  const [selectedPostId, setSelectedPost] = useState(null)
+  const handleMarkerClick = useCallback((id) => setSelectedPost(id), [])
+
+  useEffect(() => {
+    document.querySelector(`[data-id="${selectedPostId}"]`)?.scrollIntoView()
+  }, [selectedPostId])
+
   return (
     <>
       <Head>
@@ -21,6 +29,7 @@ const Home = () => {
         <PostsMap
           className={styles.map}
           data={postGroups.flatMap(p => p.expand())}
+          onMarkerClick={handleMarkerClick}
         />
 
         <div className={styles.content}>
@@ -29,6 +38,8 @@ const Home = () => {
               <PostCard
                 key={post.url}
                 data={post}
+                data-id={post.id}
+                active={selectedPostId === post.id}
                 tag="li"
               />
             ))}

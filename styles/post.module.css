@@ -44,3 +44,9 @@
 .source {
   margin-inline-end: auto;
 }
+
+/* Modifiers */
+
+:where(.container).active {
+  background-color: #3f51b521;
+}

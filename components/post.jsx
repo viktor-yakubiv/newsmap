@@ -8,6 +8,7 @@ const formatDomain = (url) => new URL(url).hostname
 
 const Post = ({
   data,
+  active,
   onEdit,
   onDelete,
   className,
@@ -20,7 +21,11 @@ const Post = ({
 
   return (
     <Tag
-      className={joinClassNames(styles.container, className)}
+      className={joinClassNames(
+        styles.container,
+        active && styles.active,
+        className,
+      )}
       {...restProps}
     >
       <Header className={styles.header}>
