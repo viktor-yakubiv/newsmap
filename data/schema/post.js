@@ -1,5 +1,5 @@
 import Location from './location'
-import { calcFreshness } from './utils'
+import { freshness } from '../../utils/date'
 
 class Post {
   constructor(init) {
@@ -11,7 +11,7 @@ class Post {
   }
 
   get freshness() {
-    return calcFreshness(this.publicationDate)
+    return freshness(this.publicationDate)
   }
 }
 

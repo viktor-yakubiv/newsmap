@@ -1,19 +1,15 @@
-const LOCALE = 'uk-UA'
-
-const DURATION_SECOND = 1000 // ms
-const DURATION_MINUTE = 60 * DURATION_SECOND
-const DURATION_HOUR = 60 * DURATION_MINUTE
-const DURATION_DAY = 24 * DURATION_HOUR
-const DURATION_WEEK = 7 * DURATION_DAY
-const DURATION_MONTH = 30 * DURATION_DAY
-const DURATION_YEAR = 365 * DURATION_DAY
+import {
+  LOCALE,
+  DURATION_SECOND,
+  DURATION_MINUTE,
+  DURATION_HOUR,
+  DURATION_DAY,
+  DURATION_WEEK,
+  DURATION_MONTH,
+  DURATION_YEAR,
+} from './constants'
 
 const locale = LOCALE // could be configured in the future
-
-const dateFormat = new Intl.DateTimeFormat(locale, {
-  dateStyle: 'long',
-  timeStyle: 'short',
-})
 
 const relativeTimeFormat = new Intl.RelativeTimeFormat(locale)
 
@@ -23,8 +19,6 @@ const extraReplacements = new Map([
     [/\b0\s(\w+)s/, 'менше, ніж $1'],
   ]],
 ])
-
-const formatDate = date => dateFormat.format(date)
 
 const formatRelativeDate = (target) => {
   const diff = target - Date.now()
@@ -52,7 +46,4 @@ const formatRelativeDate = (target) => {
     .replace(/(in|a)\s/g, '$1\xa0')
 }
 
-export {
-  formatDate,
-  formatRelativeDate,
-}
+export default formatRelativeDate

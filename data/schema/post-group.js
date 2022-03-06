@@ -1,6 +1,6 @@
 import Location from './location'
 import Post from './post'
-import { calcFreshness } from './utils'
+import { freshness } from '../../utils/date'
 
 class PostGroup {
   constructor(init) {
@@ -11,8 +11,12 @@ class PostGroup {
     this.locations = locations.map(locationInit => new Location(locationInit))
   }
 
+  get location() {
+    return this.locations[0]
+  }
+
   get freshness() {
-    return calcFreshness(this.publicationDate)
+    return freshness(this.publicationDate)
   }
 
   expand() {
