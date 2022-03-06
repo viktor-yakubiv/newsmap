@@ -1,4 +1,4 @@
-import { useCallback, useRef } from 'react'
+import { forwardRef, useCallback, useRef } from 'react'
 import joinClassNames from 'classnames'
 import ActionBar from './action-bar'
 import styles from '../styles/post.module.css'
@@ -6,7 +6,7 @@ import { formatDate, formatRelativeDate } from '../utils'
 
 const formatDomain = (url) => new URL(url).hostname
 
-const Post = ({
+const Post = forwardRef(({
   data,
   active,
   onEdit,
@@ -14,13 +14,14 @@ const Post = ({
   className,
   tag: Tag = 'div',
   ...restProps
-}) => {
+}, ref) => {
   const isSectioning = /section|article/ig.test(Tag)
   const Header = isSectioning ? 'header' : 'div'
   const Footer = isSectioning ? 'footer' : 'div'
 
   return (
     <Tag
+      ref={ref}
       className={joinClassNames(
         styles.container,
         active && styles.active,
@@ -66,6 +67,8 @@ const Post = ({
       </Footer>
     </Tag>
   )
-}
+})
+
+Post.displayName = 'Post'
 
 export default Post
