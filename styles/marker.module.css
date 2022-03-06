@@ -1,4 +1,6 @@
 .marker {
+  composes: slideInDown from '~animate.css/source/sliding_entrances/slideInDown.css';
+
   position: relative;
   width: 1.4;
   height: 100%;
@@ -10,4 +12,5 @@
     inset 1px 1px 4px rgb(255 255 255 / .12),
     inset -1px -2px 8px rgb(0 0 0 / .12);
   filter: grayscale(calc(100% * (1 - var(--freshness, 1))));
+  animation-duration: calc(150ms * var(--freshness, 1) + 100ms);
 }
