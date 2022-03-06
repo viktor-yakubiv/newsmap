@@ -1,4 +1,4 @@
-const LOCALE = 'uk-UA'
+export const LOCALE = 'uk-UA'
 
 export const DURATION_SECOND = 1000 // ms
 export const DURATION_MINUTE = 60 * DURATION_SECOND
