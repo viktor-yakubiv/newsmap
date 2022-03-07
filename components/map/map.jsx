@@ -42,7 +42,7 @@ const StaticMap = ({ data, onBoundsChange, onMarkerClick }) => (
 
     {data.posts.map(({ id, location, freshness }) => (
       <Marker
-        key={[id, location.id].join()}
+        key={[id, location].join()}
         latitude={location.latitude}
         longitude={location.longitude}
         freshness={freshness}

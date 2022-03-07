@@ -15,6 +15,14 @@ class Location {
     Object.assign(this, { id, name })
   }
 
+  toString() {
+    return [...this].map(n => n.toFixed(6)).join()
+  }
+
+  valueOf() {
+    return this.toString()
+  }
+
   // Enables syntax like `[lat, lng] = locationInstance`
   *[Symbol.iterator] () {
     yield this.latitude

@@ -9,7 +9,7 @@ import styles from '../styles/app.module.css'
 const Home = () => {
   const router = useRouter()
   const { data, error } = useData({ token: router.query.token })
-  const postGroups = data || []
+  const { posts: postGroups = [], locations = [] } = data ?? {}
 
   const [selectedPostId, setSelectedPost] = useState(null)
   const handleMarkerClick = useCallback((id) => setSelectedPost(id), [])
