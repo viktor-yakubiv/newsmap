@@ -20,6 +20,14 @@ const Marker = ({
      lng: longitude
   }), [latitude, longitude])
 
+  const icon = useMemo(() => new Icon({
+    latitude,
+    longitude,
+    freshness,
+    title,
+    size: mapSize(size),
+  }), [latitude, longitude, freshness, title, size])
+
   const click = useCallback(
     () => onClick?.({ latitude, longitude }),
     [latitude, longitude, onClick],
@@ -28,12 +36,7 @@ const Marker = ({
   return (
     <LeafletMarker
       position={position}
-      icon={new Icon({
-        freshness,
-        highlighted,
-        title,
-        size: mapSize(size),
-      })}
+      icon={icon}
       eventHandlers={{ click }}
     />
   )
