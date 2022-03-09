@@ -40,14 +40,14 @@ const StaticMap = ({ data, onBoundsChange, onMarkerClick }) => (
       url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
     />
 
-    {data.posts.map(({ id, location, freshness }) => (
+    {data.locations.map(location => (
       <Marker
-        key={[id, location].join()}
+        key={location.key}
         latitude={location.latitude}
         longitude={location.longitude}
-        freshness={freshness}
-        highlighted={data.highlighted?.includes(location.id)}
-        onClick={() => onMarkerClick?.(id)}
+        freshness={location.freshness}
+        highlighted={false}
+        onClick={() => onMarkerClick?.(location)}
       />
     ))}
 

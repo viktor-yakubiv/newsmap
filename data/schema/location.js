@@ -23,7 +23,7 @@ class Location {
     return this.toString()
   }
 
-  // Enables syntax like `[lat, lng] = locationInstance`
+  // Enables syntax like `[latitude, longitude] = locationInstance`
   *[Symbol.iterator] () {
     yield this.latitude
     yield this.longitude

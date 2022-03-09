@@ -2,10 +2,10 @@ import useSWR from 'swr'
 import resolve from './resolve'
 import request from './request'
 import { transformPost } from './transformers'
-import { PostGroup, Location } from './schema'
+import { Post, PostLocation as Location } from './schema'
 
 const transformToSchema = rawPosts => rawPosts
-  .map(rawPost => new PostGroup(transformPost(rawPost)))
+  .map(rawPost => new Post(transformPost(rawPost)))
 
 /**
  * Removes duplicated location objects from response
@@ -14,6 +14,7 @@ const transformToSchema = rawPosts => rawPosts
 const unifyData = posts => {
   const uniqueLocations = new Map()
 
+  // Gather unique locations
   posts.flatMap(post => post.locations).forEach(l => {
     const pointKey = l.valueOf()
 
@@ -24,7 +25,7 @@ const unifyData = posts => {
     }
   })
 
-  // Replace all locations in every Post with uniquer objects
+  // Replace all locations in every Post with unique objects
   posts.forEach(p => {
     const uniqueForPost = p.locations.map(l => uniqueLocations.get(l.valueOf()))
     const deduplicated = [...new Set(uniqueForPost)]
@@ -33,6 +34,12 @@ const unifyData = posts => {
   })
 
   const locations = Array.from(uniqueLocations.values())
+
+  // Link every location to its corresponding set of posts
+  locations.forEach(l => {
+    const linkedPosts = posts.filter(p => p.locations.includes(l))
+    l.posts.push(...linkedPosts)
+  })
 
   return { posts, locations }
 }

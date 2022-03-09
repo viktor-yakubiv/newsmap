@@ -3,15 +3,28 @@ import { freshness } from '../../utils/date'
 
 class Post {
   constructor(init) {
-    const { publicationDate, location, ...passData } = init
+    const { publicationDate, locations, ...passData } = init
 
     Object.assign(this, passData)
     this.publicationDate = new Date(publicationDate)
-    this.location = new Location(location)
+    this.locations = locations.map(locationInit => new Location(locationInit))
   }
 
-  get freshness() {
-    return freshness(this.publicationDate)
+  get location() {
+    // Ideally, the one set manually, otherwise just first
+    return this.locations[0]
+  }
+
+  freshness(duration) {
+    return freshness(this.publicationDate, duration)
+  }
+
+  valueOf() {
+    return this.id
+  }
+
+  toString() {
+    this.valueOf().toString()
   }
 }
 
