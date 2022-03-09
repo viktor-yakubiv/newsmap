@@ -27,10 +27,22 @@ const Home = () => {
   const filteredPosts = selectedLocation ? posts.filter(p => p.locations.includes(selectedLocation)) : null
 
   // TODO: Remove when decided; not used due to rendering issues
-  const [highlightedLocations, setHighlightedPost] = useState(null)
-  // const highlightedLocations = posts
-  //   .find(({ id }) => id === highlightedPostId)
-  //   ?.locations.map(({ id }) => id)
+  const [highlightedLocations, setHighlightedLocations] = useState([])
+  const highlightPost = useCallback((event) => {
+    const { id } = event.target.dataset
+    const post = posts.find(p => id == p.id)
+
+    if (post != null) {
+      setHighlightedLocations([...post.locations])
+    }
+  }, [posts])
+
+  const clearHighlighting = useCallback(() => {
+    setHighlightedLocations([])
+  }, [])
+
+  console.log(highlightedLocations)
+
 
   return (
     <>
@@ -43,15 +55,14 @@ const Home = () => {
         <PostsMap
           className={styles.map}
           data={{
-            locations: locations.map(l => ({
-              key: l.valueOf(),
+            markers: locations.map(l => ({
               latitude: l.latitude,
               longitude: l.longitude,
               freshness: l.freshness(DURATION_DAY),
+              highlighted: highlightedLocations.includes(l),
               size: l.size,
               name: l.name,
             })),
-            highlighted: highlightedLocations,
           }}
           onMarkerClick={handleMarkerClick}
         />
@@ -63,6 +74,8 @@ const Home = () => {
                 key={post.valueOf()}
                 data={post}
                 data-id={post.id}
+                onMouseEnter={highlightPost}
+                onMouseLeave={clearHighlighting}
                 tag="li"
               />
             ))}
