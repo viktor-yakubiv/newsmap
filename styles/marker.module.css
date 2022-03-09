@@ -1,16 +1,15 @@
 .marker {
-  /* Disabled due to problems with rendering and React */
-  /*composes: slideInDown from '~animate.css/source/sliding_entrances/slideInDown.css';*/
+  --shadow-opacity: .25;
+
   box-sizing: border-box;
   border: 2px solid #fff;
   border-radius: 50%;
   background-color: #3f51b5;
   box-shadow:
-    inset 1px 1px 4px rgb(255 255 255 / .25),
-    inset -1px -2px 8px rgb(0 0 0 / .25);
+    inset 1px 1px 4px rgb(255 255 255 / var(--shadow-opacity, 0)),
+    inset -1px -2px 8px rgb(0 0 0 / var(--shadow-opacity, 0));
   filter:
     grayscale(calc(100% * (1 - var(--freshness, 1))));
-  animation-duration: calc(150ms * var(--freshness, 1) + 100ms);
   transition: background-color 50ms;
 }
 
@@ -26,6 +25,8 @@
 }
 
 .highlighted {
-  background-color: #304ffe;
+  --shadow-opacity: .12;
+
+  background-color: #ffd600;
   filter: none;
 }
