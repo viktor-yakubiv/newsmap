@@ -1,5 +1,6 @@
 .marker {
-  composes: slideInDown from '~animate.css/source/sliding_entrances/slideInDown.css';
+  /* Disabled due to problems with rendering and React */
+  /*composes: slideInDown from '~animate.css/source/sliding_entrances/slideInDown.css';*/
 
   position: relative;
   width: 1.4;
