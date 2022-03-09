@@ -42,6 +42,7 @@ const Home = () => {
               longitude: l.longitude,
               freshness: l.freshness(DURATION_DAY),
               size: l.size,
+              name: l.name,
             })),
             highlighted: highlightedLocations,
           }}
