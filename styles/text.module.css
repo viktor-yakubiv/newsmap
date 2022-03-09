@@ -1,0 +1,3 @@
+.container {
+  composes: stack from 'layout.module.css';
+}
