@@ -9,13 +9,20 @@
   border-radius: 50%;
   background-color: #3f51b5;
   box-shadow:
-    inset 1px 1px 4px rgb(255 255 255 / .12),
-    inset -1px -2px 8px rgb(0 0 0 / .12);
-  filter: grayscale(calc(100% * (1 - var(--freshness, 1))));
+    inset 1px 1px 4px rgb(255 255 255 / .25),
+    inset -1px -2px 8px rgb(0 0 0 / .25);
+  filter:
+    grayscale(calc(100% * (1 - var(--freshness, 1))));
   animation-duration: calc(150ms * var(--freshness, 1) + 100ms);
   transition: background-color 50ms;
 }
 
+.marker:hover {
+  background-color: #536dfe;
+  filter: none;
+}
+
 .highlighted {
-  background-color: #fdd835;
+  background-color: #304ffe;
+  filter: none;
 }
