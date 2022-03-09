@@ -1,10 +1,6 @@
 .marker {
   /* Disabled due to problems with rendering and React */
   /*composes: slideInDown from '~animate.css/source/sliding_entrances/slideInDown.css';*/
-
-  position: relative;
-  width: 1.4;
-  height: 100%;
   box-sizing: border-box;
   border: 2px solid #fff;
   border-radius: 50%;
@@ -20,6 +16,12 @@
 
 .marker:hover {
   background-color: #536dfe;
+  filter: none;
+}
+
+.marker:active,
+.marker.active {
+  background-color: #3d5afe;
   filter: none;
 }
 
