@@ -6,6 +6,7 @@ import styles from '../../styles/marker.module.css'
 class Icon extends L.DivIcon {
   constructor({
     title,
+    size = 8, // px
     freshness = 1,
     highlighted = false,
   } = {}) {
@@ -17,8 +18,8 @@ class Icon extends L.DivIcon {
           title="${title ?? ''}"
         ></div>
       `,
-      iconSize: [24, 24],
-      iconAnchor: [12, 12],
+      iconSize: [size, size],
+      iconAnchor: [size / 2, size / 2],
     })
   }
 }

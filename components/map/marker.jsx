@@ -1,11 +1,20 @@
 import { useCallback, useMemo } from 'react'
 import { Marker as LeafletMarker } from 'react-leaflet'
 import Icon from './icon'
+import { mapRange } from '../../utils/math'
 
-const MIN_OPACITY = 0.5
-const calcOpacity = freshness => freshness * (1 - MIN_OPACITY) + MIN_OPACITY
+// Arbitrary values
+const mapSize = value => mapRange(value, { from: [1, 9], to: [16, 24] })
 
-const Marker = ({ title, longitude, latitude, freshness, highlighted, onClick }) => {
+const Marker = ({
+  longitude,
+  latitude,
+  size,
+  freshness,
+  title,
+  highlighted,
+  onClick,
+}) => {
   const position = useMemo(() => ({
      lat: latitude,
      lng: longitude
@@ -20,6 +29,7 @@ const Marker = ({ title, longitude, latitude, freshness, highlighted, onClick })
         freshness,
         highlighted,
         title,
+        size: mapSize(size),
       })}
       eventHandlers={{ click }}
     />

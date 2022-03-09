@@ -47,6 +47,7 @@ const StaticMap = ({ data, onBoundsChange, onMarkerClick }) => (
         longitude={location.longitude}
         freshness={location.freshness}
         title={location.name}
+        size={location.size}
         highlighted={false}
         onClick={() => onMarkerClick?.(location)}
       />
