@@ -4,6 +4,7 @@ import Head from 'next/head'
 import PostsMap from '../components/map'
 import PostCard from '../components/post'
 import { useData } from '../data'
+import { Location } from '../data/schema'
 import styles from '../styles/app.module.css'
 import { DURATION_DAY } from '../utils/date/constants'
 
@@ -12,18 +13,24 @@ const Home = () => {
   const { data, error } = useData({ token: router.query.token })
   const { posts = [], locations = [] } = data ?? {}
 
-  const [selectedPostId, setSelectedPost] = useState(null)
-  const handleMarkerClick = useCallback((id) => setSelectedPost(id), [])
+  const [selectedLocation, setSelectedLocation] = useState(null)
+  const handleMarkerClick = useCallback(({ latitude, longitude }) => {
+    const key = Location.prototype.toString.call([latitude, longitude])
+    const location = locations.find(location => key == location)
+    setSelectedLocation(location ?? null)
+  }, [locations])
 
-  useEffect(() => {
-    document.querySelector(`[data-id="${selectedPostId}"]`)?.scrollIntoView()
-  }, [selectedPostId])
+  const clearLocationSelection = useCallback(() => {
+    setSelectedLocation(null)
+  }, [])
+
+  const filteredPosts = selectedLocation ? posts.filter(p => p.locations.includes(selectedLocation)) : null
 
   // TODO: Remove when decided; not used due to rendering issues
-  const [highlightedPostId, setHighlightedPost] = useState(null)
-  const highlightedLocations = posts
-    .find(({ id }) => id === highlightedPostId)
-    ?.locations.map(({ id }) => id)
+  const [highlightedLocations, setHighlightedPost] = useState(null)
+  // const highlightedLocations = posts
+  //   .find(({ id }) => id === highlightedPostId)
+  //   ?.locations.map(({ id }) => id)
 
   return (
     <>
@@ -51,16 +58,21 @@ const Home = () => {
 
         <div className={styles.content}>
           <ul>
-            {posts.map(post => (
+            {(filteredPosts ?? posts).map(post => (
               <PostCard
                 key={post.valueOf()}
                 data={post}
                 data-id={post.id}
-                active={selectedPostId === post.id}
                 tag="li"
               />
             ))}
           </ul>
+
+          {filteredPosts && (
+            <button onClick={clearLocationSelection}>
+              Видалити фільтр
+            </button>
+          )}
         </div>
       </div>
     </>

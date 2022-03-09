@@ -20,7 +20,10 @@ const Marker = ({
      lng: longitude
   }), [latitude, longitude])
 
-  const click = useCallback(() => onClick?.(), [onClick])
+  const click = useCallback(
+    () => onClick?.({ latitude, longitude }),
+    [latitude, longitude, onClick],
+  )
 
   return (
     <LeafletMarker
