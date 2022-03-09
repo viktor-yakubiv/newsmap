@@ -24,7 +24,7 @@ const resolve = (params = {}) => {
   const url = new URL(API_BASE)
 
   // Configuration
-  if (since) url.searchParams.set('from_date', since)
+  if (since) url.searchParams.set('start_date', since)
   if (until) url.searchParams.set('end_date', until)
   if (query) url.searchParams.set('text', query)
 
