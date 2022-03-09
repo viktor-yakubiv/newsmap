@@ -18,6 +18,7 @@ const Home = () => {
     document.querySelector(`[data-id="${selectedPostId}"]`)?.scrollIntoView()
   }, [selectedPostId])
 
+  // TODO: Remove when decided; not used due to rendering issues
   const [highlightedPostId, setHighlightedPost] = useState(null)
   const highlightedLocations = postGroups
     .find(({ id }) => id === highlightedPostId)
@@ -48,8 +49,6 @@ const Home = () => {
                 data={post}
                 data-id={post.id}
                 active={selectedPostId === post.id}
-                onMouseEnter={() => setHighlightedPost(post.id)}
-                onMouseLeave={() => setHighlightedPost(null)}
                 tag="li"
               />
             ))}
