@@ -1,22 +1,18 @@
 .container {
-  --row-gap: 0px;
-  --col-gap: 0px;
-  --sidebar-size: 40ch;
-  composes: with-sidebar from 'layout.module.css';
   position: relative;
+  display: grid;
+  grid-template-columns: auto 40ch;
+  grid-template-areas: "map list";
   height: 100%;
 }
 
-.map > * {
-  /* Overrides 'relative' by Leaflet */
-  position: sticky !important;
-  top: 0;
-  min-height: 80vh;
-  max-height: 100vh;
+.map {
+  grid-area: map;
 }
 
 .content {
-  composes: sidebar from 'layout.module.css';
+  grid-area: list;
+  overflow-y: auto;
   z-index: 1;
 }
 
