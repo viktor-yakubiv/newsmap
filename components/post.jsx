@@ -2,6 +2,7 @@ import { forwardRef, useCallback, useRef } from 'react'
 import joinClassNames from 'classnames'
 import ActionBar from './action-bar'
 import Text from './text'
+import TextClamp from './text-clamp'
 import styles from '@/styles/post.module.css'
 import { formatDate, formatRelativeDate } from '@/utils'
 
@@ -45,7 +46,9 @@ const Post = forwardRef(({
         </div>
       </Header>
 
-      <Text className={styles.content} value={data.text} />
+      <TextClamp>
+        <Text className={styles.content} value={data.text} />
+      </TextClamp>
 
       <p className={styles.location}>
         {data.locations.map(l => l.name).join('; ')}
