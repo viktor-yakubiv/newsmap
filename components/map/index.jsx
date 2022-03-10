@@ -1,5 +1,5 @@
 import dynamic from 'next/dynamic'
-import styles from './styles.module.css'
+import styles from '@/styles/map.module.css'
 import joinClassNames from 'classnames'
 
 const DynamicMap = dynamic(() => import('./map'), {
@@ -12,7 +12,7 @@ const MapContainer = ({
   children,
   ...passProps
 }) => (
-  <Tag className={joinClassNames(styles.container,className)}>
+  <Tag className={joinClassNames(styles.container, className)}>
     <DynamicMap {...passProps}>
       {children}
     </DynamicMap>

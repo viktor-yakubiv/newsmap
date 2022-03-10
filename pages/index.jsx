@@ -1,12 +1,12 @@
 import { useCallback, useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import Head from 'next/head'
-import PostsMap from '../components/map'
-import PostCard from '../components/post'
-import { useData } from '../data'
-import { Location } from '../data/schema'
-import styles from '../styles/app.module.css'
-import { DURATION_DAY } from '../utils/date/constants'
+import PostsMap from '@/components/map'
+import PostCard from '@/components/post'
+import { useData } from '@/data'
+import { Location } from '@/data/schema'
+import styles from '@/styles/app.module.css'
+import { DURATION_DAY } from '@/utils/date/constants'
 
 const Home = () => {
   const router = useRouter()

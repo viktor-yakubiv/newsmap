@@ -1,6 +1,6 @@
 import { Fragment } from 'react'
 import joinClassNames from 'classnames'
-import styles from '../styles/text.module.css'
+import styles from '@/styles/text.module.css'
 
 const Text = ({ className, tag: Tag = 'div', value, ...restProps }) => (
   <Tag className={joinClassNames(styles.container, className)}>

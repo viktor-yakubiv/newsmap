@@ -1,4 +1,4 @@
-import { DURATION_MINUTE, DURATION_DAY } from '../utils/date/constants'
+import { DURATION_MINUTE, DURATION_DAY } from '@/utils/date/constants'
 
 const API_BASE = 'https://geonames.dev.socmonitor.com.ua/api/v1/news'
 

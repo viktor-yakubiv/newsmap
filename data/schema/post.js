@@ -1,5 +1,5 @@
 import Location from './location'
-import { freshness } from '../../utils/date'
+import { freshness } from '@/utils/date'
 
 class Post {
   constructor(init) {

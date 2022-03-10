@@ -1,8 +1,8 @@
 import { useCallback, useEffect, useMemo, useRef } from 'react'
 import { Marker as LeafletMarker } from 'react-leaflet'
 import Icon from './icon'
-import { mapRange } from '../../utils/math'
-import styles from '../../styles/marker.module.css'
+import { mapRange } from '@/utils/math'
+import styles from '@/styles/marker.module.css'
 
 // Arbitrary values
 const mapSize = value => mapRange(value, { from: [1, 9], to: [16, 24] })

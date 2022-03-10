@@ -2,8 +2,8 @@ import { forwardRef, useCallback, useRef } from 'react'
 import joinClassNames from 'classnames'
 import ActionBar from './action-bar'
 import Text from './text'
-import styles from '../styles/post.module.css'
-import { formatDate, formatRelativeDate } from '../utils'
+import styles from '@/styles/post.module.css'
+import { formatDate, formatRelativeDate } from '@/utils'
 
 const formatDomain = (url) => new URL(url).hostname
 

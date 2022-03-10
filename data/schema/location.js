@@ -1,4 +1,4 @@
-import { distance } from '../../utils/geo'
+import { distance } from '@/utils/geo'
 
 class Location {
   constructor(init) {

@@ -1,5 +1,5 @@
 import joinClassNames from 'classnames'
-import styles from '../styles/action-bar.module.css'
+import styles from '@/styles/action-bar.module.css'
 
 const ActionBar = ({ onEdit, onDelete, className, ...htmlAttrs }) => (
   <ul className={joinClassNames(styles.container, className)} {...htmlAttrs}>
