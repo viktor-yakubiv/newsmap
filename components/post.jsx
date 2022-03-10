@@ -1,4 +1,5 @@
 import { forwardRef, useCallback, useRef } from 'react'
+import Image from 'next/image'
 import joinClassNames from 'classnames'
 import ActionBar from './action-bar'
 import Text from './text'
@@ -32,10 +33,6 @@ const Post = forwardRef(({
       {...restProps}
     >
       <Header className={styles.header}>
-        <h2 className={styles.title}>
-          {data.title}
-        </h2>
-
         <div className={styles.meta}>
           <time
             dateTime={data.publicationDate.toISOString()}
@@ -53,6 +50,16 @@ const Post = forwardRef(({
       <p className={styles.location}>
         {data.locations.map(l => l.name).join('; ')}
       </p>
+
+      <div>
+        <img
+          src={data.author.avatarUrl}
+          alt=""
+          width={32}
+          htight={32}
+        />
+        {data.author.name}
+      </div>
 
       <Footer className={styles.footer}>
         <p className={styles.source}>
