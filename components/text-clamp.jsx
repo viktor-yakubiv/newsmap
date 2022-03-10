@@ -26,8 +26,14 @@ const TextClamp = ({ children, className, tag: Tag = 'div', ...restProps }) => {
         {children}
       </div>
 
-      <button onClick={expand} hidden={expanded}>
-        Expand
+      <button
+        className={styles.button}
+        title="Показати текст повністю"
+        hidden={expanded}
+        onClick={expand}
+      >
+        <span aria-hidden="true">• • •</span>{' '}
+        <span className={styles.caption}>Розгорнути</span>
       </button>
     </Tag>
   )

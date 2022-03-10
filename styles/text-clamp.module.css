@@ -1,7 +1,23 @@
+.container {
+  composes: stack from 'layout.module.css';
+
+  --spacer: var(--space-200);
+}
+
 .content:not(.expanded) {
   display: -webkit-box;
   overflow: hidden;
   text-overflow: ellipsis;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: var(--line-clamp, 3);
+}
+
+.button {
+  display: block;
+  width: 100%;
+  cursor: pointer;
+}
+
+.caption {
+  composes: visually-hidden from 'layout.module.css';
 }
