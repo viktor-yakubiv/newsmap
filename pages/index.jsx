@@ -41,9 +41,6 @@ const Home = () => {
     setHighlightedLocations([])
   }, [])
 
-  console.log(highlightedLocations)
-
-
   return (
     <>
       <Head>
