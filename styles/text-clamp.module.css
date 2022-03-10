@@ -1,7 +1,13 @@
 .container {
-  composes: stack from 'layout.module.css';
+  composes: box from 'layout.module.css';
+  --inset-inline: var(--space-300);
+  --inset-block: var(--space-300);
+  --corner-radius: 4px;
 
-  --spacer: var(--space-200);
+  position: relative;
+  margin-inline: calc(-1 * var(--inset-inline));
+  margin-inline: calc(-1 * var(--inset-block));
+  border-radius: var(--corner-radius);
 }
 
 .content:not(.expanded) {
@@ -13,11 +19,35 @@
 }
 
 .button {
+  position: absolute;
+  top: 100%;
+  left: 0;
   display: block;
   width: 100%;
+  border: 0;
+  border-radius: 0 0 var(--corner-radius) var(--corner-radius);
   cursor: pointer;
+  transition: opacity 50ms;
 }
 
 .caption {
   composes: visually-hidden from 'layout.module.css';
+}
+
+/* Effect of showing the button when hover over whole container */
+
+.button:not(:focus) {
+  visibility: hidden;
+  opacity: 0;
+}
+
+.container:hover {
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+  background-color: #0000000c;
+}
+
+.container:hover .button {
+  visibility: visible;
+  opacity: 1;
 }
