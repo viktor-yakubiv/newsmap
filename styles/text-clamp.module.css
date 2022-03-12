@@ -10,7 +10,7 @@
   border-radius: var(--corner-radius);
 }
 
-.content:not(.expanded) {
+:where(.container:not(.expanded)) .content {
   display: -webkit-box;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -41,7 +41,7 @@
   opacity: 0;
 }
 
-.container:hover {
+.container:not(.expanded):hover {
   border-bottom-right-radius: 0;
   border-bottom-left-radius: 0;
   background-color: #0000000c;

@@ -1,11 +1,17 @@
-import { useCallback, useEffect, useState, useRef } from 'react'
+import { forwardRef, useCallback, useEffect, useState, useRef } from 'react'
 import joinClassNames from 'classnames'
+import { useClickEffect } from '@/utils/hooks'
 import styles from '@/styles/text-clamp.module.css'
 
-const TextClamp = ({ children, className, tag: Tag = 'div', ...restProps }) => {
+const TextClamp = forwardRef((
+  { children, className, tag: Tag = 'div', ...restProps },
+  ref
+) => {
   const contentRef = useRef(null)
   const [expanded, setExpanded] = useState(false)
   const expand = useCallback(() => setExpanded(true), [])
+
+  const contentProps = useClickEffect(() => setExpanded(true))
 
   useEffect(() => {
     const element = contentRef.current
@@ -16,12 +22,18 @@ const TextClamp = ({ children, className, tag: Tag = 'div', ...restProps }) => {
 
   return (
     <Tag
-      className={joinClassNames(styles.container, className)}
+      ref={ref}
+      className={joinClassNames(
+        styles.container,
+        expanded && styles.expanded,
+        className,
+      )}
       {...restProps}
     >
       <div
         ref={contentRef}
-        className={joinClassNames(styles.content, expanded && styles.expanded)}
+        className={joinClassNames(styles.content)}
+        {...(!expanded ? contentProps : {})}
       >
         {children}
       </div>
@@ -37,6 +49,8 @@ const TextClamp = ({ children, className, tag: Tag = 'div', ...restProps }) => {
       </button>
     </Tag>
   )
-}
+})
+
+TextClamp.displayName = 'TextClamp'
 
 export default TextClamp
