@@ -14,7 +14,6 @@ class Post {
         const specificity = Math.sign(b.specificity - a.specificity)
         return 10 * country + specificity
       })
-    console.log(this.locations)
   }
 
   get location() {
