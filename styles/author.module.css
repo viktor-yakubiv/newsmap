@@ -1,0 +1,36 @@
+.container {
+  --col-gap: var(--space-300);
+  --row-gap: var(--space-200);
+
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-areas: 'picture content';
+  gap: var(--row-gap) var(--col-gap);
+}
+
+.content {
+  composes: stack from 'layout.module.css';
+  --spacer: var(--space-200);
+}
+
+.content > * {
+  display: block;
+}
+
+.avatar {
+  width: 1.5em;
+  height: 1.5em;
+  border: 1px solid #0000000c;
+  border-radius: 50%;
+  background-color: #eee;
+  object-fit: cover;
+}
+
+.meta {
+  font-size: .875rem;
+  color: #0009;
+}
+
+.conjunction {
+  composes: visually-hidden from 'layout.module.css';
+}

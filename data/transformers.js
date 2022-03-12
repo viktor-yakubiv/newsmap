@@ -9,7 +9,10 @@ const transformLocation = (location) => ({
   featureCode: location.feature_code,
 })
 
-const transformAuthor = author => author
+const transformAuthor = ({ subscribers, ...author }) => ({
+  ...author,
+  followersCount: subscribers,
+})
 
 const transformPost = (post) => ({
   id: post.id,
@@ -17,7 +20,7 @@ const transformPost = (post) => ({
   // cleaning up an empty title separated by a semicolon (`;`)
   text: post.text.replace(/^\s*;\s*/i, ''),
   language: post.language,
-  author: transformAuthor(post.author),
+  author: transformAuthor(post.author ?? {}),
   publicationDate: post.publishedAt,
   locations: post.locations.map(transformLocation),
 })

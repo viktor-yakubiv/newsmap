@@ -2,12 +2,11 @@ import { forwardRef, useCallback, useRef } from 'react'
 import Image from 'next/image'
 import joinClassNames from 'classnames'
 import ActionBar from './action-bar'
+import Author from './author'
 import Text from './text'
 import TextClamp from './text-clamp'
 import styles from '@/styles/post.module.css'
-import { formatDate, formatRelativeDate } from '@/utils'
-
-const formatDomain = (url) => new URL(url).hostname
+import { formatDate, formatRelativeDate, formatDomain } from '@/utils'
 
 const Post = forwardRef(({
   data,
@@ -51,18 +50,7 @@ const Post = forwardRef(({
         {data.locations.map(l => l.name).join('; ')}
       </p>
 
-      {data?.author && (
-        <div>
-          <img
-            src={data.author.avatarUrl}
-            alt=""
-            width={32}
-            htight={32}
-          />
-          {' '}
-          {data.author.name}
-        </div>
-      )}
+      {data?.author && <Author data={data.author} />}
 
       <Footer className={styles.footer}>
         <p className={styles.source}>
