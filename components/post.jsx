@@ -53,7 +53,7 @@ const Post = forwardRef(({
 
       <div>
         <img
-          src={data.author.avatarUrl}
+          src={data.author?.avatarUrl}
           alt=""
           width={32}
           htight={32}
