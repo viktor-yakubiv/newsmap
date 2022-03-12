@@ -4,6 +4,8 @@ const transformLocation = (location) => ({
   longitude: location.location.lon,
   name: location.name,
   alternativeNames: location.alternatenames,
+  featureClass: location.feature_class,
+  featureCode: location.feature_code,
 })
 
 const transformAuthor = author => author

@@ -7,11 +7,19 @@ class Post {
 
     Object.assign(this, passData)
     this.publicationDate = new Date(publicationDate)
-    this.locations = locations.map(locationInit => new Location(locationInit))
+    this.locations = locations
+      .map(locationInit => new Location(locationInit))
+      .sort((a, b) => {
+        const country = (b.countryCode == 'UA') - (a.countryCode == 'UA')
+        const specificity = b.featureClass > a.featureClass
+        return 10 * country + specificity
+      })
+    console.log(this.locations)
   }
 
   get location() {
-    // Ideally, the one set manually, otherwise just first
+    // Ideally, the one set manually;
+    // otherwise, the most specific one due to sorting in the constructor
     return this.locations[0]
   }
 

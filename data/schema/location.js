@@ -11,8 +11,8 @@ class Location {
       Object.assign(this, { latitude, longitude })
     }
 
-    const { id, name } = init
-    Object.assign(this, { id, name })
+    const { id, name, countryCode, featureClass, featureCode } = init
+    Object.assign(this, { id, name, countryCode, featureClass, featureCode })
   }
 
   toString() {
