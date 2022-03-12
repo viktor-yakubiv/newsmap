@@ -22,3 +22,16 @@
   background-color: #fff;
   box-shadow: var(--elevation-4);
 }
+
+.list > * {
+  background-clip: padding-box;
+}
+
+.list > * + * {
+  border-block-start: 1px solid #0000000c;
+}
+
+/* Proper displaying of the transparent borders on the background */
+.list > *:hover {
+  z-index: 1000;
+}

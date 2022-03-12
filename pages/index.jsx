@@ -65,7 +65,7 @@ const Home = () => {
         />
 
         <div className={styles.content}>
-          <ul>
+          <ul className={styles.list}>
             {(filteredPosts ?? posts).map(post => (
               <PostCard
                 key={post.valueOf()}
