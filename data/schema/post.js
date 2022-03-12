@@ -11,7 +11,7 @@ class Post {
       .map(locationInit => new Location(locationInit))
       .sort((a, b) => {
         const country = (b.countryCode == 'UA') - (a.countryCode == 'UA')
-        const specificity = b.featureClass > a.featureClass
+        const specificity = Math.sign(b.specificity - a.specificity)
         return 10 * country + specificity
       })
     console.log(this.locations)

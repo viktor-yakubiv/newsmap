@@ -1,5 +1,7 @@
 import { distance } from '@/utils/geo'
 
+const featureClassOrder = ['A', 'P']
+
 class Location {
   constructor(init) {
     // Enables initializing from array
@@ -13,6 +15,11 @@ class Location {
 
     const { id, name, countryCode, featureClass, featureCode } = init
     Object.assign(this, { id, name, countryCode, featureClass, featureCode })
+  }
+
+  get specificity() {
+    const index = featureClassOrder.indexOf(this.featureClass)
+    return (index === -1 ? featureClassOrder.length : index) + 1
   }
 
   toString() {
