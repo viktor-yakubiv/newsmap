@@ -51,15 +51,18 @@ const Post = forwardRef(({
         {data.locations.map(l => l.name).join('; ')}
       </p>
 
-      <div>
-        <img
-          src={data.author?.avatarUrl}
-          alt=""
-          width={32}
-          htight={32}
-        />
-        {data.author.name}
-      </div>
+      {data?.author && (
+        <div>
+          <img
+            src={data.author.avatarUrl}
+            alt=""
+            width={32}
+            htight={32}
+          />
+          {' '}
+          {data.author.name}
+        </div>
+      )}
 
       <Footer className={styles.footer}>
         <p className={styles.source}>
