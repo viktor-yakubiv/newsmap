@@ -1,0 +1,3 @@
+.container {
+  composes: icon from 'layout.module.css';
+}

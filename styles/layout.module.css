@@ -153,6 +153,28 @@
 }
 
 /**
+ * Icon
+ *
+ * Details: https://every-layout.dev/layouts/icon
+ */
+
+.icon {
+  --space: var(--col-gap, var(--space-200));
+  --outset: 2px;
+
+  display: inline-block;
+  inline-size: calc(.75em + 2 * var(--outset));
+  inline-size: calc(1cap + 2 * var(--outset));
+  block-size: calc(.75em + 2 * var(--outset));
+  block-size: calc(1cap + 2 * var(--outset));
+  margin-inline-start: calc(-1 * var(--outset));
+  margin-inline-end: calc(var(--space) - var(--outset));
+  margin-block: calc(-1 * var(--outset));
+  color: var(--icon-color, inherit);
+  fill: currentColor;
+}
+
+/**
  * Visually hidden
  *
  * Hides the element for visual users but preserves it accessible
