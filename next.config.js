@@ -6,15 +6,24 @@ const nextConfig = {
   reactStrictMode: true,
 
   webpack(config) {
+    const iconsDirectory = path.join(__dirname, 'assets/icons')
+
     const nextImagesRule = config.module.rules
       .find(({ loader }) => loader === 'next-image-loader')
-    nextImagesRule.exclude = /\.icon\.svg$/i
+    nextImagesRule.exclude = [
+      iconsDirectory,
+      /\.icon\.svg$/i,
+    ]
 
     config.module.rules.push({
-      test: /\.icon\.svg$/i,
+      test: [
+        iconsDirectory,
+        /\.icon\.svg$/i,
+      ],
       loader: 'svg-sprite-loader',
       options: {
-        symbolId: (filePath) => path.basename(filePath, '.icon.svg'),
+        symbolId: (filePath) =>
+          path.basename(filePath).replace(/(\.icon)?\.svg$/i, ''),
         extract: true,
         spriteFilename: 'icons-[hash:16].svg'
       },
