@@ -1,5 +1,3 @@
-export const LOCALE = 'uk-UA'
-
 export const DURATION_SECOND = 1000 // ms
 export const DURATION_MINUTE = 60 * DURATION_SECOND
 export const DURATION_HOUR = 60 * DURATION_MINUTE

@@ -1,5 +1,4 @@
 import {
-  LOCALE,
   DURATION_SECOND,
   DURATION_MINUTE,
   DURATION_HOUR,
@@ -7,9 +6,9 @@ import {
   DURATION_WEEK,
   DURATION_MONTH,
   DURATION_YEAR,
-} from './constants'
+} from '../../date/constants'
 
-const locale = LOCALE // could be configured in the future
+const locale = 'uk-UA' // could be configured in the future
 
 const relativeTimeFormat = new Intl.RelativeTimeFormat(locale)
 

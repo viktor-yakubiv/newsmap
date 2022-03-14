@@ -1,6 +1,4 @@
-import { LOCALE } from './constants'
-
-const locale = LOCALE // could be configured in the future
+const locale = 'uk-UA' // could be configured in the future
 
 const dateFormat = new Intl.DateTimeFormat(locale, {
   dateStyle: 'long',
