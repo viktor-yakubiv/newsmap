@@ -2,8 +2,6 @@
   composes: stack from 'layout.module.css';
   composes: box from 'layout.module.css';
 
-  --spacer: var(--space-300);
-
   background-color: #fff;
   transition: 150ms;
 }
@@ -14,31 +12,26 @@
 }
 
 .header {
-  composes: stack from 'layout.module.css';
+  composes: with-sidebar from 'layout.module.css';
 
-  --spacer: var(--space-200);
+  --row-gap: var(--space-300);
 }
 
 .footer {
   composes: cluster from 'layout.module.css';
 }
 
-.title {
-  font-size: 1rem;
+.content {
+  composes: stack from 'layout.module.css';
+  --spacer: var(--space-300);
 }
-
-.meta {
-  composes: cluster from 'layout.module.css';
-
-  color: #616161;
-  font-size: 0.85rem;
-}
-
-.content {}
 
 .location {
-  color: #616161;
-  font-size: 0.85rem;
+  font-weight: bolder;
+}
+
+.date {
+  composes: sidebar from 'layout.module.css';
 }
 
 .source {

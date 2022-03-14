@@ -32,25 +32,26 @@ const Post = forwardRef(({
       {...restProps}
     >
       <Header className={styles.header}>
-        <div className={styles.meta}>
-          <time
-            dateTime={data.publicationDate.toISOString()}
-            title={formatDate(data.publicationDate)}
-          >
-            {formatRelativeDate(data.publicationDate)}
-          </time>
-        </div>
+        <span className={styles.location}>
+          {data.location?.name ?? data.location}
+        </span>
+
+        <time
+          className={styles.date}
+          dateTime={data.publicationDate.toISOString()}
+          title={formatDate(data.publicationDate)}
+        >
+          {formatRelativeDate(data.publicationDate)}
+        </time>
       </Header>
 
-      <TextClamp>
-        <Text className={styles.content} value={data.text} />
-      </TextClamp>
+      <div className={styles.content}>
+        <TextClamp>
+          <Text className={styles.content} value={data.text} />
+        </TextClamp>
 
-      <p className={styles.location}>
-        {data.locations.map(l => l.name).join('; ')}
-      </p>
-
-      {data?.author && <Author data={data.author} />}
+        {data?.author && <Author data={data.author} />}
+      </div>
 
       <Footer className={styles.footer}>
         <p className={styles.source}>

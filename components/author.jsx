@@ -27,13 +27,15 @@ const Author = forwardRef(
 
       <p className={styles.content}>
         <span className={styles.name}>{data.name}</span>
-        <span className={styles.conjunction}> — </span>
         {data.followersCount >= 0 && (
-          <span className={styles.meta}>
-            {formatInteger(data.followersCount)}
-            &nbsp;
-            {selectPlural(data.followersCount, subscriberPluralMap)}
-          </span>
+          <>
+            <span className={styles.conjunction}> • </span>
+            <span className={styles.meta}>
+              {formatInteger(data.followersCount)}
+              &nbsp;
+              {selectPlural(data.followersCount, subscriberPluralMap)}
+            </span>
+          </>
         )}
       </p>
     </Tag>

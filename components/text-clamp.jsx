@@ -28,6 +28,7 @@ const TextClamp = forwardRef((
         expanded && styles.expanded,
         className,
       )}
+      title={!expanded ? 'Показати текст повністю' : null}
       {...restProps}
     >
       <div

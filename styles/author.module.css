@@ -6,15 +6,13 @@
   grid-template-columns: auto 1fr;
   grid-template-areas: 'picture content';
   gap: var(--row-gap) var(--col-gap);
+
+  font-size: .875rem;
 }
 
 .content {
   composes: stack from 'layout.module.css';
   --spacer: var(--space-200);
-}
-
-.content > * {
-  display: block;
 }
 
 .avatar {
@@ -27,10 +25,9 @@
 }
 
 .meta {
-  font-size: .875rem;
   color: #0009;
 }
 
 .conjunction {
-  composes: visually-hidden from 'layout.module.css';
+  color: #0006;
 }
