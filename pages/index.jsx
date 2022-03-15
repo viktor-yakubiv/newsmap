@@ -9,6 +9,7 @@ import { useData } from '@/data'
 import { Location } from '@/data/schema'
 import styles from '@/styles/app.module.css'
 import { DURATION_DAY } from '@/utils/date/constants'
+import { formatInteger } from '@/utils/formatters'
 
 const Home = () => {
   const router = useRouter()
@@ -70,16 +71,32 @@ const Home = () => {
 
         <main className={styles.content}>
           <header className={styles.header}>
-            {selectedLocation && (
-              <div className={styles.headerButton}>
-                <button onClick={clearLocationSelection}>
-                  <Icon {...arrowLeft} /> до всіх
-                </button>
-              </div>
+            {selectedLocation ? (
+              <>
+                <div className={styles.headerButton}>
+                  <button onClick={clearLocationSelection}>
+                    <Icon {...arrowLeft} /> до всіх
+                  </button>
+                </div>
+                <div>
+                    <h1>{selectedLocation}</h1>
+                    <p>
+                      {formatInteger(filteredPosts.length)}
+                      {' '}із&nbsp;
+                      {formatInteger(posts.length)}
+                    </p>
+                </div>
+              </>
+            ) : (
+              <>
+                <div>
+                  <h1>Усі</h1>
+                  <p>
+                    {formatInteger(posts.length)}
+                  </p>
+                </div>
+              </>
             )}
-            <div>
-              {selectedLocation ? selectedLocation?.name : 'Усі'}
-            </div>
           </header>
 
           <ul className={styles.list}>
