@@ -16,8 +16,9 @@ const resolve = (params = {}) => {
   const {
     // Some precision required to prevent infinite request loop
     since = new Date(now - DURATION_DAY).toISOString(),
-    until = new Date(now).toISOString(),
+    until,
     query,
+    limit = 10_000,
     token,
   } = params
 
@@ -27,6 +28,7 @@ const resolve = (params = {}) => {
   if (since) url.searchParams.set('start_date', since)
   if (until) url.searchParams.set('end_date', until)
   if (query) url.searchParams.set('text', query)
+  if (limit) url.searchParams.set('size', limit)
 
   // Authorization side-effect
   if (token) url.searchParams.set('access_token', token)
