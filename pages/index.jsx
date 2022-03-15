@@ -3,15 +3,15 @@ import { useRouter } from 'next/router'
 import arrowLeft from '@/assets/icons/arrow-left.svg'
 import Icon from '@/components/icon'
 import Head from 'next/head'
-import PostsMap from '@/components/map'
 import PostCard from '@/components/post'
 import { useData } from '@/data'
 import { Location } from '@/data/schema'
 import styles from '@/styles/app.module.css'
 import { DURATION_DAY } from '@/utils/date/constants'
 import { formatInteger } from '@/utils/formatters'
+import { MapView } from '@/views'
 
-const Home = () => {
+const HomePage = () => {
   const router = useRouter()
   const token = typeof localStorage != 'undefined'
     ? localStorage.ACCESS_TOKEN
@@ -46,6 +46,15 @@ const Home = () => {
     setHighlightedLocations([])
   }, [])
 
+  const markers = locations.map(l => ({
+    latitude: l.latitude,
+    longitude: l.longitude,
+    freshness: l.freshness(DURATION_DAY),
+    highlighted: highlightedLocations.includes(l),
+    size: l.size,
+    name: l.name,
+  }))
+
   return (
     <>
       <Head>
@@ -53,68 +62,49 @@ const Home = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <div className={styles.container}>
-        <PostsMap
-          className={styles.map}
-          data={{
-            markers: locations.map(l => ({
-              latitude: l.latitude,
-              longitude: l.longitude,
-              freshness: l.freshness(DURATION_DAY),
-              highlighted: highlightedLocations.includes(l),
-              size: l.size,
-              name: l.name,
-            })),
-          }}
-          onMarkerClick={handleMarkerClick}
-        />
+      <MapView markers={markers} onMarkerClick={handleMarkerClick}>
+        <header className={styles.header}>
+          {selectedLocation ? (
+            <>
+              <div className={styles.headerButton}>
+                <button onClick={clearLocationSelection}>
+                  <Icon {...arrowLeft} /> до всіх
+                </button>
+              </div>
+              <div>
+                <h1>{selectedLocation.name ?? selectedLocation.toString()}</h1>
+                <p>
+                  {formatInteger(filteredPosts.length)}
+                  {' '}із&nbsp;
+                  {formatInteger(posts.length)}
+                </p>
+              </div>
+            </>
+          ) : (
+            <>
+              <div>
+                <h1>Усі</h1>
+                <p>
+                  {formatInteger(posts.length)}
+                </p>
+              </div>
+            </>
+          )}
+        </header>
 
-        <main className={styles.content}>
-          <header className={styles.header}>
-            {selectedLocation ? (
-              <>
-                <div className={styles.headerButton}>
-                  <button onClick={clearLocationSelection}>
-                    <Icon {...arrowLeft} /> до всіх
-                  </button>
-                </div>
-                <div>
-                    <h1>{selectedLocation}</h1>
-                    <p>
-                      {formatInteger(filteredPosts.length)}
-                      {' '}із&nbsp;
-                      {formatInteger(posts.length)}
-                    </p>
-                </div>
-              </>
-            ) : (
-              <>
-                <div>
-                  <h1>Усі</h1>
-                  <p>
-                    {formatInteger(posts.length)}
-                  </p>
-                </div>
-              </>
-            )}
-          </header>
-
-          <ul className={styles.list}>
-            {(filteredPosts ?? posts).map(post => (
-              <PostCard
-                key={post.valueOf()}
-                data={post}
-                data-id={post.id}
-                onMouseEnter={highlightPost}
-                onMouseLeave={clearHighlighting}
-                tag="li"
-              />
-            ))}
-          </ul>
-        </main>
-      </div>
+        {(filteredPosts ?? posts).map(post => (
+          <PostCard
+            key={post.valueOf()}
+            data={post}
+            data-id={post.id}
+            onMouseEnter={highlightPost}
+            onMouseLeave={clearHighlighting}
+            tag="section"
+          />
+        ))}
+      </MapView>
     </>
   )
 }
 
-export default Home
+export default HomePage
