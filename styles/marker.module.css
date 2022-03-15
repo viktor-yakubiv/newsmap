@@ -27,6 +27,7 @@
 .highlighted {
   --shadow-opacity: .12;
 
+  z-index: 10000 !important;
   background-color: #ffd600;
   filter: none;
 }
