@@ -39,7 +39,7 @@ const Post = forwardRef(({
         <time
           className={styles.date}
           dateTime={data.publicationDate.toISOString()}
-          title={formatDate(data.publicationDate)}
+          title={formatDate(data.publicationDate, { style: 'long' })}
         >
           {formatRelativeDate(data.publicationDate)}
         </time>
