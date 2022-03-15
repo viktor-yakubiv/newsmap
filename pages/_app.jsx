@@ -2,8 +2,8 @@ import 'leaflet/dist/leaflet.css'
 import '@/styles/index.css'
 import '@/styles/leaflet.css'
 
-function MapApp({ Component, pageProps }) {
-  return <Component {...pageProps} />
-}
+const App = ({ Component, pageProps }) => (
+  <Component {...pageProps} />
+)
 
-export default MapApp
+export default App
