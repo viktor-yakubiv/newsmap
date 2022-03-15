@@ -11,6 +11,12 @@ import { DURATION_DAY } from '@/utils/date/constants'
 import { formatInteger, formatDate } from '@/utils/formatters'
 import { MapView } from '@/views'
 
+const generateTitle = ({ since, count }) => [
+  'Новини',
+  since && `від ${formatDate(new Date(since))}`,
+  count != null && `– ${formatInteger(count)} результатів`,
+].filter(v => v).join(' ')
+
 const useAccessToken = () => {
   const router = useRouter()
   return typeof localStorage != 'undefined'
@@ -69,7 +75,12 @@ const HomePage = () => {
   return (
     <>
       <Head>
-        <title>Новини</title>
+        <title>
+          {generateTitle({
+            since: query.since,
+            count: posts.length,
+          })}
+        </title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
