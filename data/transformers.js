@@ -14,16 +14,20 @@ const transformAuthor = ({ subscribers, ...author }) => ({
   followersCount: subscribers,
 })
 
-const transformPost = (post) => ({
-  id: post.id,
-  permalink: post.permalink,
-  // cleaning up an empty title separated by a semicolon (`;`)
-  text: post.text.replace(/^\s*;\s*/i, ''),
-  language: post.language,
-  author: transformAuthor(post.author ?? {}),
-  publicationDate: post.publishedAt,
-  locations: post.locations.map(transformLocation),
-})
+const transformPost = (post) => {
+  const [title, text] = post.text.split(' ; ', 2)
+
+  return {
+    title,
+    text,
+    id: post.id,
+    permalink: post.permalink,
+    language: post.language,
+    author: transformAuthor(post.author ?? {}),
+    publicationDate: post.publishedAt,
+    locations: post.locations.map(transformLocation),
+  }
+}
 
 export {
   transformAuthor,
