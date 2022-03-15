@@ -12,7 +12,10 @@ import { DURATION_DAY } from '@/utils/date/constants'
 
 const Home = () => {
   const router = useRouter()
-  const { data, error } = useData({ token: router.query.token })
+  const token = typeof localStorage != 'undefined'
+    ? localStorage.ACCESS_TOKEN
+    : router.query.token // backward compatibility
+  const { data, error } = useData({ token })
   const { posts = [], locations = [] } = data ?? {}
 
   const [selectedLocation, setSelectedLocation] = useState(null)
