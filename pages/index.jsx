@@ -31,7 +31,6 @@ const Home = () => {
 
   const filteredPosts = selectedLocation ? posts.filter(p => p.locations.includes(selectedLocation)) : null
 
-  // TODO: Remove when decided; not used due to rendering issues
   const [highlightedLocations, setHighlightedLocations] = useState([])
   const highlightPost = useCallback((event) => {
     const { id } = event.target.dataset
