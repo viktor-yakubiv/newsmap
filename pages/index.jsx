@@ -13,7 +13,7 @@ import { MapView } from '@/views'
 
 const generateTitle = ({ since, count }) => [
   'Новини',
-  since && `від ${formatDate(new Date(since))}`,
+  since ? `від ${formatDate(new Date(since))}` : 'за останню добу',
   count != null && `– ${formatInteger(count)} результатів`,
 ].filter(v => v).join(' ')
 
