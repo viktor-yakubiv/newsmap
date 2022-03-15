@@ -1,6 +1,5 @@
 import L from 'leaflet'
 import joinClassNames from 'classnames'
-import markerIcon from './marker.svg'
 
 class Icon extends L.DivIcon {
   constructor({
