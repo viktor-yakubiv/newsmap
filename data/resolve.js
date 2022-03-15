@@ -14,8 +14,7 @@ const round = t => Math.floor(t / PRECISION) * PRECISION
 const resolve = (params = {}) => {
   const now = round(Date.now())
   const {
-    // Some precision required to prevent infinite request loop
-    since = new Date(now - DURATION_DAY).toISOString(),
+    since,
     until,
     query,
     limit = 10_000,

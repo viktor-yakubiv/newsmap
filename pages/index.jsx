@@ -8,15 +8,26 @@ import { useData } from '@/data'
 import { Location } from '@/data/schema'
 import styles from '@/styles/app.module.css'
 import { DURATION_DAY } from '@/utils/date/constants'
-import { formatInteger } from '@/utils/formatters'
+import { formatInteger, formatDate } from '@/utils/formatters'
 import { MapView } from '@/views'
 
-const HomePage = () => {
+const useAccessToken = () => {
   const router = useRouter()
-  const token = typeof localStorage != 'undefined'
+  return typeof localStorage != 'undefined'
     ? localStorage.ACCESS_TOKEN
     : router.query.token // backward compatibility
-  const { data, error } = useData({ token })
+}
+
+const useQuery = () => {
+  const router = useRouter()
+  const { since, until } = router.query
+  return { since, until }
+}
+
+const HomePage = () => {
+  const token = useAccessToken()
+  const query = useQuery()
+  const { data, error } = useData({ ...query, token })
   const { posts = [], locations = [] } = data ?? {}
 
   const [selectedLocation, setSelectedLocation] = useState(null)
@@ -64,32 +75,29 @@ const HomePage = () => {
 
       <MapView markers={markers} onMarkerClick={handleMarkerClick}>
         <header className={styles.header}>
-          {selectedLocation ? (
-            <>
-              <div className={styles.headerButton}>
-                <button onClick={clearLocationSelection}>
-                  <Icon {...arrowLeft} /> до всіх
-                </button>
-              </div>
-              <div>
-                <h1>{selectedLocation.name ?? selectedLocation.toString()}</h1>
-                <p>
-                  {formatInteger(filteredPosts.length)}
-                  {' '}із&nbsp;
-                  {formatInteger(posts.length)}
-                </p>
-              </div>
-            </>
-          ) : (
-            <>
-              <div>
-                <h1>Усі</h1>
-                <p>
-                  {formatInteger(posts.length)}
-                </p>
-              </div>
-            </>
+          {selectedLocation && (
+            <div className={styles.headerButton}>
+              <button onClick={clearLocationSelection}>
+                <Icon {...arrowLeft} /> до всіх
+              </button>
+            </div>
           )}
+
+          <div>
+            <h1>
+              {
+                selectedLocation
+                  ? (selectedLocation.name ?? selectedLocation.toString())
+                  : 'Усі'
+              }
+            </h1>
+
+            <p>
+              {filteredPosts && `${formatInteger(filteredPosts.length)} із\u00a0`}
+              {formatInteger(posts.length)}
+              {query.since && ` від\u00a0${formatDate(new Date(query.since))}`}
+            </p>
+          </div>
         </header>
 
         {(filteredPosts ?? posts).map(post => (
