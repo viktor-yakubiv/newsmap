@@ -164,14 +164,15 @@
 
   display: inline-block;
   inline-size: calc(.75em + 2 * var(--outset));
-  inline-size: calc(1cap + 2 * var(--outset));
+  inline-size: var(--icon-size, calc(1cap + 2 * var(--outset)));
   block-size: calc(.75em + 2 * var(--outset));
-  block-size: calc(1cap + 2 * var(--outset));
+  block-size: var(--icon-size, calc(1cap + 2 * var(--outset)));
   margin-inline-start: calc(-1 * var(--outset));
   margin-inline-end: calc(var(--space) - var(--outset));
   margin-block: calc(-1 * var(--outset));
   color: var(--icon-color, inherit);
   fill: currentColor;
+  stroke: currentColor;
 }
 
 /**

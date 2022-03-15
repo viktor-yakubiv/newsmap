@@ -71,7 +71,7 @@ const Home = () => {
             {selectedLocation && (
               <div className={styles.headerButton}>
                 <button onClick={clearLocationSelection}>
-                  <Icon src={arrowLeft} /> до всіх
+                  <Icon {...arrowLeft} /> до всіх
                 </button>
               </div>
             )}

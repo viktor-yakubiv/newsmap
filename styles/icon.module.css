@@ -1,3 +1,6 @@
 .container {
   composes: icon from 'layout.module.css';
+
+  --icon-size: 1.5rem;
+  --outset: calc((var(--icon-size) - 1cap) / 2);
 }
