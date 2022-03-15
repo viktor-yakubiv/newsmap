@@ -1,5 +1,7 @@
 import { useCallback, useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
+import arrowLeft from '@/assets/icons/arrow-left.svg'
+import Icon from '@/components/icon'
 import Head from 'next/head'
 import PostsMap from '@/components/map'
 import PostCard from '@/components/post'
@@ -64,7 +66,20 @@ const Home = () => {
           onMarkerClick={handleMarkerClick}
         />
 
-        <div className={styles.content}>
+        <main className={styles.content}>
+          <header className={styles.header}>
+            {selectedLocation && (
+              <div className={styles.headerButton}>
+                <button onClick={clearLocationSelection}>
+                  <Icon src={arrowLeft} /> до всіх
+                </button>
+              </div>
+            )}
+            <div>
+              {selectedLocation ? selectedLocation?.name : 'Усі'}
+            </div>
+          </header>
+
           <ul className={styles.list}>
             {(filteredPosts ?? posts).map(post => (
               <PostCard
@@ -77,13 +92,7 @@ const Home = () => {
               />
             ))}
           </ul>
-
-          {filteredPosts && (
-            <button onClick={clearLocationSelection}>
-              Видалити фільтр
-            </button>
-          )}
-        </div>
+        </main>
       </div>
     </>
   )
