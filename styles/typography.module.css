@@ -1,0 +1,42 @@
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6 {
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+.h1 {
+  font-size: var(--size-900);
+}
+
+.h2 {
+  font-size: var(--size-700);
+}
+
+.h3 {
+  font-size: var(--size-500);
+}
+
+.h4 {
+  font-size: var(--size-400);
+}
+
+.h5 {
+  font-size: var(--size-300);
+}
+
+.h6 {
+  font-size: var(--size-200);
+}
+
+.lead {
+  font-size: var(--size-500);
+  font-weight: 300;
+}
+
+.small {
+  font-size: var(--size-300);
+}
