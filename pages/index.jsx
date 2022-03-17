@@ -10,6 +10,7 @@ import styles from '@/styles/app.module.css'
 import { DURATION_DAY } from '@/utils/date/constants'
 import { formatInteger, formatDate } from '@/utils/formatters'
 import { MapView } from '@/views'
+import { typography } from '@/styles'
 
 const generateTitle = ({ since, count }) => [
   'Новини',
@@ -95,7 +96,7 @@ const HomePage = () => {
           )}
 
           <div>
-            <h1>
+            <h1 className={typography.h3}>
               {
                 selectedLocation
                   ? (selectedLocation.name ?? selectedLocation.toString())
