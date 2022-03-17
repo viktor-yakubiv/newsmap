@@ -12,13 +12,16 @@ const useIconEffect = (ref, func, deps = []) => useEffect(() => {
   return func(iconElement)
 }, deps)
 
+const statusClassNames = ['normal', 'highlighted', 'active']
+  .map(name => styles[name])
+
 const Marker = ({
   longitude,
   latitude,
   size,
   freshness,
   title,
-  highlighted,
+  status = 'normal',
   onClick,
 }) => {
   const markerRef = useRef()
@@ -42,8 +45,9 @@ const Marker = ({
   }, [freshness])
 
   useIconEffect(markerRef, (iconElement) => {
-    iconElement.classList.toggle(styles.highlighted, highlighted)
-  }, [highlighted])
+    iconElement.classList.remove(...statusClassNames)
+    iconElement.classList.add(styles[status])
+  }, [status])
 
   const click = useCallback(
     () => onClick?.({ latitude, longitude }),

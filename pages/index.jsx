@@ -68,7 +68,10 @@ const HomePage = () => {
     latitude: l.latitude,
     longitude: l.longitude,
     freshness: l.freshness(DURATION_DAY),
-    highlighted: highlightedLocations.includes(l),
+    status:
+      l === selectedLocation ? 'active' :
+      highlightedLocations.includes(l) ? 'highlighted' :
+      'normal',
     size: l.size,
     name: l.name,
   }))
