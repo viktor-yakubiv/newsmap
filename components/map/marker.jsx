@@ -4,8 +4,12 @@ import Icon from './icon'
 import { mapRange } from '@/utils/math'
 import styles from '@/styles/marker.module.css'
 
-// Arbitrary values
-const mapSize = value => mapRange(value, { from: [1, 9], to: [16, 24] })
+// Arbitrary value
+const mapSize = value => mapRange(value, {
+  from: [1, 9],
+  to: [16, 24],
+  clamp: true,
+})
 
 const useIconEffect = (ref, func, deps = []) => useEffect(() => {
   const iconElement = ref.current.getElement()
