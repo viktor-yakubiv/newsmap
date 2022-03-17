@@ -27,7 +27,7 @@
 }
 
 .location {
-  font-weight: bolder;
+  composes: h4 from 'typography.module.css';
 }
 
 .date {
@@ -42,4 +42,8 @@
 
 :where(.container).active {
   background-color: #3f51b521;
+}
+
+:where(.location).disabled {
+  color: var(--disabled-content);
 }

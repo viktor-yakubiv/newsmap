@@ -3,10 +3,24 @@ import Image from 'next/image'
 import joinClassNames from 'classnames'
 import ActionBar from './action-bar'
 import Author from './author'
+import Location from './location'
 import Text from './text'
 import TextClamp from './text-clamp'
 import styles from '@/styles/post.module.css'
 import { formatDate, formatRelativeDate, formatDomain } from '@/utils'
+
+const formatLatitude = value => {
+  const dir = ['пн.', '', 'пд.'][Math.sign(value) + 1]
+  return `${value.toFixed(4)}°\u00a0${dir ? `${dir}\u202f` : ''}ш.`
+}
+
+const formatLongitude = value => {
+  const dir = ['зх.', '', 'сх.'][Math.sign(value) + 1]
+  return `${value.toFixed(4)}°\u00a0${dir ? `${dir}\u202f` : ''}ш.`
+}
+
+const formatLocation = ({ name, latitude, longitude }) =>
+  name ?? [formatLatitude(latitude), formatLongitude(longitude)].join(', ')
 
 const Post = forwardRef(({
   data,
@@ -32,9 +46,22 @@ const Post = forwardRef(({
       {...restProps}
     >
       <Header className={styles.header}>
-        <span className={styles.location}>
-          {data.location?.name ?? data.location}
-        </span>
+        {data.location ? (
+          <Location
+            data={{
+              main: data.location ? formatLocation(data.location) : null,
+              options: data.locations
+                .filter(l => l != data.location)
+                .map(formatLocation),
+            }}
+            className={styles.location}
+            tag="h2"
+          />
+        ) : (
+          <h2 className={joinClassNames(styles.location, styles.disabled)}>
+            Немає гео-мітки
+          </h2>
+        )}
 
         <time
           className={styles.date}
