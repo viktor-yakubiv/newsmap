@@ -7,10 +7,11 @@ import PostCard from '@/components/post'
 import { useData } from '@/data'
 import { Location } from '@/data/schema'
 import styles from '@/styles/app.module.css'
-import { DURATION_DAY } from '@/utils/date/constants'
+import { DURATION_DAY } from '@/utils/date'
 import { formatInteger, formatDate } from '@/utils/formatters'
 import { MapView } from '@/views'
 import { typography } from '@/styles'
+import { useTimeSpan } from '@/hooks'
 
 const generateTitle = ({ since, count }) => [
   'Новини',
@@ -76,6 +77,8 @@ const HomePage = () => {
     name: l.name,
   }))
 
+  const [timeSpanValue, selectTimeSpan] = useTimeSpan()
+
   return (
     <>
       <Head>
@@ -112,6 +115,24 @@ const HomePage = () => {
               {formatInteger(posts.length)}
               {query.since && ` від\u00a0${formatDate(new Date(query.since))}`}
             </p>
+          </div>
+
+          <div>
+            <label htmlFor="time-span">
+              Часовий проміжок
+            </label>
+            <select
+              id="time-span"
+              value={timeSpanValue}
+              onChange={selectTimeSpan}
+            >
+              <option value="1h">Останню годину</option>
+              <option value="3h">Останні 3 години</option>
+              <option value="6h">6 годин</option>
+              <option value="12h">12 годин</option>
+              <option value="1d">добу</option>
+              <option value="1w">тиждень</option>
+            </select>
           </div>
         </header>
 
