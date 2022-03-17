@@ -5,9 +5,11 @@ export const mapRange = (value, {
   to = [0, 1],
   clamp: useClamp = false,
 } = {}) => {
-  const [fromMin, fromMax] = from
-  const [toMin, toMax] = to
+  const fromMin = Math.min(...from)
+  const fromMax = Math.max(...from)
+  const toMin = Math.min(...to)
+  const toMax = Math.max(...to)
   const actualValue = useClamp ? clamp(fromMin, value, fromMax) : value
 
-  return (value - fromMin) / (fromMax - fromMin) * (toMax - toMin) + toMin
+  return (actualValue - fromMin) / (fromMax - fromMin) * (toMax - toMin) + toMin
 }
