@@ -1,0 +1,17 @@
+.container {
+  composes: box from 'layout.module.css';
+  --inset-inline: var(--space-300);
+  --inset-block: var(--space-100);
+
+  display: inline-block;
+  box-sizing: content-box;
+  margin-block: calc(-1 * var(--inset-block));
+  min-inline-size: 1em;
+  min-inline-size: 1lh;
+  border-radius: 1rem;
+  font-size: inherit;
+  line-height: inherit;
+  background-color: #eee;
+  color: var(--minor-content);
+  text-align: center;
+}
