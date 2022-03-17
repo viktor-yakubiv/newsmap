@@ -6,8 +6,8 @@ import styles from '@/styles/marker.module.css'
 
 // Arbitrary value
 const mapSize = value => mapRange(value, {
-  from: [1, 9],
-  to: [16, 24],
+  from: [1, 17],
+  to: [16, 32],
   clamp: true,
 })
 
